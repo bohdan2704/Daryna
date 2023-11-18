@@ -1,37 +1,32 @@
 package org.example;
 
 public class Binary {
-    private int adderOne;
-    private int adderTwo;
-
-    public Binary(int adderOne, int adderTwo) {
-        this.adderOne = adderOne;
-        this.adderTwo = adderTwo;
+    public Binary() {
     }
 
     public int add(int a, int b) {
         int cin = 0;
-        int c = 0;
+        int bin = 0;
 
         while (a != 0 || b != 0) {
             Pair p = bitAdder(a&1, b&1, cin);
-            c |= p.s();
+            bin |= p.sum();
             cin = p.cout();
 
             // Not like computer works, but still interesting
             // Because in Java there is no binary type, and this work like right and left shift
             a /= 10;
             b /= 10;
-            c *= 10;
+            bin *= 10;
         }
         if (cin == 1) {
             // Add if some 1 is left in carry out bit
-            c |= cin;
+            bin |= cin;
         } else {
             // Remove redundant shove
-            c /= 10;
+            bin /= 10;
         }
-        return reverse(c);
+        return reverse(bin);
     }
 
 
@@ -47,6 +42,8 @@ public class Binary {
     }
 
     public int subtract(int a, int b) {
+        b = invert(b);
+        b = add(b, 1);
         return add(a, b);
     }
 
@@ -60,5 +57,27 @@ public class Binary {
         }
 
         return result;
+    }
+
+    public int invert(int binaryNumber) {
+        // Convert the decimal binary number to a binary string
+        String binaryString = Integer.toBinaryString(binaryNumber);
+
+        // Create a StringBuilder to store the inverted bits
+        StringBuilder invertedBits = new StringBuilder();
+
+        // Iterate through each character in the binary string and invert the bit
+        for (char bit : binaryString.toCharArray()) {
+            if (bit == '0') {
+                invertedBits.append('1');
+            } else {
+                invertedBits.append('0');
+            }
+        }
+
+        // Convert the inverted bits back to an integer
+        int invertedBinaryNumber = Integer.parseInt(invertedBits.toString(), 2);
+
+        return invertedBinaryNumber;
     }
 }
