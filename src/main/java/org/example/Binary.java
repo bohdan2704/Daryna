@@ -15,18 +15,20 @@ public class Binary {
 
             // Not like computer works, but still interesting
             // Because in Java there is no binary type, and this work like right and left shift
-            a /= 10;
-            b /= 10;
-            bin *= 10;
+            a >>= 1;
+            b >>= 1;
+            bin <<= 1;
         }
         if (cin == 1) {
             // Add if some 1 is left in carry out bit
             bin |= cin;
         } else {
             // Remove redundant shove
-            bin /= 10;
+            bin >>= 1;
         }
-        return reverse(bin);
+        bin = reverse(bin);
+        System.out.println(Integer.toBinaryString(bin));
+        return bin;
     }
 
 
@@ -42,42 +44,33 @@ public class Binary {
     }
 
     public int subtract(int a, int b) {
+        System.out.println(Integer.toBinaryString(b));
         b = invert(b);
-        b = add(b, 1);
+        System.out.println(Integer.toBinaryString(b));
+        b = add(b, 0b1);
+        System.out.println(Integer.toBinaryString(b));
         return add(a, b);
     }
 
-    private int reverse(int x) {
-        int result = 0;
+    public static int reverse(int num) {
+        int reversed = 0;
 
-        while (x != 0) {
-            int digit = x % 10;
-            x /= 10;
-            result = result * 10 + digit;
+        // Iterate through each bit in the binary representation of the number
+        while (num > 0) {
+            // Shift the reversed bits to the left and add the rightmost bit of the original number
+            reversed = (reversed << 1) | (num & 1);
+
+            // Right shift the original number to move to the next bit
+            num >>= 1;
         }
 
-        return result;
+        return reversed;
     }
 
-    public int invert(int binaryNumber) {
-        // Convert the decimal binary number to a binary string
-        String binaryString = Integer.toBinaryString(binaryNumber);
+    public int invert(int num) {
+        int bitmask = 0b11111;
 
-        // Create a StringBuilder to store the inverted bits
-        StringBuilder invertedBits = new StringBuilder();
-
-        // Iterate through each character in the binary string and invert the bit
-        for (char bit : binaryString.toCharArray()) {
-            if (bit == '0') {
-                invertedBits.append('1');
-            } else {
-                invertedBits.append('0');
-            }
-        }
-
-        // Convert the inverted bits back to an integer
-        int invertedBinaryNumber = Integer.parseInt(invertedBits.toString(), 2);
-
-        return invertedBinaryNumber;
+        // Use bitwise XOR to invert only the last six bits
+        return num ^ bitmask;
     }
 }

@@ -12,8 +12,8 @@ public class Main {
 
         Binary binarySum = new Binary();
 
-        int sum = binarySum.add(1111, 1010);
-        int subs = binarySum.subtract(1111, 1010);
+        int sum = binarySum.add(0b1111, 0b1010);
+        int subs = binarySum.subtract(0b1111, 0b1010);
 
         Calculator calculator = new Calculator(number1, number2);
         System.out.println(calculator.add());
