@@ -84,10 +84,24 @@ public class BinaryNumber {
 
     public String getBinaryString() {
         StringBuilder builder = new StringBuilder();
+        boolean previouslyWereJustZeroes = true;
         for (byte b : bits) {
-            builder.append(b);
-
+            if (previouslyWereJustZeroes && b == 1) {
+                previouslyWereJustZeroes = false;
+            }
+            if ( !previouslyWereJustZeroes) {
+                builder.append(b);
+            }
+        }
+        if (builder.isEmpty()) {
+            return "0";
         }
         return builder.toString();
+    }
+
+    public boolean isLessThan(BinaryNumber compareWith) {
+        int a = Integer.parseInt(getBinaryString(), 2);
+        int b = Integer.parseInt(compareWith.getBinaryString(), 2);
+        return a <= b;
     }
 }

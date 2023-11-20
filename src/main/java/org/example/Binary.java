@@ -11,32 +11,29 @@ public class Binary {
             b.fillWithZeros(a.size());
         }
 
-        BinaryNumber result = new BinaryNumber();
+        BinaryNumber result = new BinaryNumber("9".repeat(a.size()+1));
         int cin = 0;
-
-        while (a.size() != 0) {
+        int len = a.size();
+        for (int i = 0; i < len; i++){
             // Equivalent of 0 OR -- 1 AND
             byte lastBitA = a.lastBit();
             byte lastBitB = b.lastBit();
 
             a.rightShove();
             b.rightShove();
-            result.leftShove();
 
             // Calculate sum bit
             Pair pair = bitAdder(lastBitA, lastBitB, cin);
             cin = pair.cout();
-            result.setLastBit(pair.sum());
-            // Trying to implement this functionality using class and OOP points. Is it OK ?
 
-
+            // Add it to our integer, shove then to the right
+            result.setFirstBit(pair.sum());
+            result.rightShove();
         }
         if (cin == 1) {
-            // Add if some 1 is left in carry out bit
-            result.leftShove();
-            result.setLastBit(cin);
+            result.setFirstBit(cin);
         }
-        result.reverse();
+        result.rightShove();
         return result;
     }
 
@@ -57,12 +54,19 @@ public class Binary {
         } else if (a.size() > b.size()) {
             b.fillWithZeros(a.size());
         }
+        boolean resultIsLessThanZero = true;
+        if (b.isLessThan(a)) {
+            resultIsLessThanZero = false;
+        }
+
         b.invert();
         b = add(b, new BinaryNumber("1"));
         BinaryNumber res = add(a, b);
 
         // Work with this overflow, delete in some cases
-        res.deleteOverflow();
+        if (!resultIsLessThanZero) {
+            res.deleteOverflow();
+        }
         return res;
     }
 
