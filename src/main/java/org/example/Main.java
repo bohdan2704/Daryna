@@ -10,10 +10,9 @@ public class Main {
         Number number1 = new Number(NumeralSystem.HEXATRIGESIMAL_36, "0.MI");
         Number number2 = new Number(NumeralSystem.HEXATRIGESIMAL_36, "AF");
 
-        Binary binarySum = new Binary();
-
-        int sum = binarySum.add(0b1111, 0b1010);
-        int subs = binarySum.subtract(0b1111, 0b1010);
+        Binary binary = new Binary();
+        BinaryNumber added = binary.add(new BinaryNumber("1111"), new BinaryNumber("1111"));
+        BinaryNumber sunstructed = binary.subtract(new BinaryNumber("1000"), new BinaryNumber("1010"));
 
         Calculator calculator = new Calculator(number1, number2);
         System.out.println(calculator.add());

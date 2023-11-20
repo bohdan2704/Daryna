@@ -1,14 +1,92 @@
-public class BinaryNumber {
-    private String binaryString;
+package org.example;
 
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class BinaryNumber {
+    private List<Byte> bits;
+
+    public BinaryNumber() {
+        bits = new ArrayList<>();
+    }
     public BinaryNumber(String binaryString) {
         // Validate that the input string only contains 0s and 1s
         if (binaryString.matches("[01]+")) {
-            this.binaryString = binaryString;
+            convertToBits(binaryString);
         } else {
             throw new IllegalArgumentException("Invalid binary string. Only 0s and 1s are allowed.");
         }
     }
 
+    private void convertToBits(String binaryString) {
+        bits = new ArrayList<>();
+        for (char c : binaryString.toCharArray()) {
+            byte bit = (byte) Character.getNumericValue(c);
+            bits.add(bit);
+        }
+    }
 
+    public byte lastBit() {
+        return bits.get(bits.size()-1);
+    }
+
+    public void rightShove() {
+        bits.remove(bits.size()-1);
+    }
+
+    public void leftShove() {
+        // zeroToInsertSoBinaryWIllBeShoved
+        bits.add((byte)0);
+    }
+
+    public void setLastBit(int bit) {
+        bits.set(bits.size() - 1, (byte)bit);
+    }
+
+    public void reverse() {
+        bits = bits.reversed();
+    }
+
+    public void fillWithZeros(int len) {
+        int currentSize = bits.size();
+        int zerosToAdd = len - currentSize;
+
+        if (zerosToAdd > 0) {
+            List<Byte> zeroList = new ArrayList<>(zerosToAdd);
+            for (int i = 0; i < zerosToAdd; i++) {
+                zeroList.add((byte) 0);
+            }
+
+            zeroList.addAll(bits);
+            bits = zeroList;
+        }
+    }
+
+    public void invert() {
+        for (int i = 0; i < bits.size(); i++) {
+            byte n = (byte) (bits.get(i) == 1 ? 0 : 1);
+            bits.set(i, n);
+        }
+        byte k = 1;
+        bits.add(0, k);
+
+    }
+
+    public int size() {
+        return bits.size();
+    }
+
+    public void deleteOverflow() {
+        bits.remove(0);
+    }
+
+    public String getBinaryString() {
+        StringBuilder builder = new StringBuilder();
+        for (byte b : bits) {
+            builder.append(b);
+
+        }
+        return builder.toString();
+    }
 }

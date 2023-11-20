@@ -4,33 +4,40 @@ public class Binary {
     public Binary() {
     }
 
-    public int add(int a, int b) {
+    public BinaryNumber add(BinaryNumber a, BinaryNumber b) {
+        if (b.size() > a.size()) {
+            a.fillWithZeros(b.size());
+        } else {
+            b.fillWithZeros(a.size());
+        }
+
+        BinaryNumber result = new BinaryNumber();
         int cin = 0;
-        int bin = 0;
 
-        while (a != 0 || b != 0) {
-            Pair p = bitAdder(a&1, b&1, cin);
-            bin |= p.sum();
-            cin = p.cout();
+        while (a.size() != 0) {
+            // Equivalent of 0 OR -- 1 AND
+            byte lastBitA = a.lastBit();
+            byte lastBitB = b.lastBit();
 
-            // Not like computer works, but still interesting
-            // Because in Java there is no binary type, and this work like right and left shift
-            a >>= 1;
-            b >>= 1;
-            bin <<= 1;
+            // Calculate sum bit
+            Pair pair = bitAdder(lastBitA, lastBitB, cin);
+            cin = pair.cout();
+            result.setLastBit(pair.sum());
+            // Trying to implement this functionality using class and OOP points. Is it OK ?
+
+            a.rightShove();
+            b.rightShove();
+            result.leftShove();
         }
         if (cin == 1) {
             // Add if some 1 is left in carry out bit
-            bin |= cin;
+            result.setLastBit(cin);
         } else {
-            // Remove redundant shove
-            bin >>= 1;
+            result.rightShove();
         }
-        bin = reverse(bin);
-        System.out.println(Integer.toBinaryString(bin));
-        return bin;
+        result.reverse();
+        return result;
     }
-
 
     private Pair bitAdder(int a, int b, int cin) {
         int sum = a ^ b;
@@ -43,13 +50,19 @@ public class Binary {
         return new Pair(sum, cout);
     }
 
-    public int subtract(int a, int b) {
-        System.out.println(Integer.toBinaryString(b));
-        b = invert(b);
-        System.out.println(Integer.toBinaryString(b));
-        b = add(b, 0b1);
-        System.out.println(Integer.toBinaryString(b));
-        return add(a, b);
+    public BinaryNumber subtract(BinaryNumber a, BinaryNumber b) {
+        if (b.size() > a.size()) {
+            a.fillWithZeros(b.size());
+        } else {
+            b.fillWithZeros(a.size());
+        }
+        b.invert();
+        b = add(b, new BinaryNumber("1"));
+        BinaryNumber res = add(a, b);
+
+        // Work with this overflow, delete in some cases
+        res.deleteOverflow();
+        return res;
     }
 
     public static int reverse(int num) {
@@ -73,4 +86,5 @@ public class Binary {
         // Use bitwise XOR to invert only the last six bits
         return num ^ bitmask;
     }
+
 }
