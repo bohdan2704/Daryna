@@ -12,15 +12,16 @@ public class BinaryNumber {
     }
     public BinaryNumber(String binaryString) {
         // Validate that the input string only contains 0s and 1s
-        if (binaryString.matches("[01]+")) {
+//        if (binaryString.matches("[01]+")) {
             convertToBits(binaryString);
-        } else {
-            throw new IllegalArgumentException("Invalid binary string. Only 0s and 1s are allowed.");
-        }
+//        } else {
+//            throw new IllegalArgumentException("Invalid binary string. Only 0s and 1s are allowed.");
+//        }
     }
 
     private void convertToBits(String binaryString) {
         bits = new ArrayList<>();
+//        bits.add((byte)0);
         for (char c : binaryString.toCharArray()) {
             byte bit = (byte) Character.getNumericValue(c);
             bits.add(bit);
@@ -40,8 +41,8 @@ public class BinaryNumber {
         bits.add((byte)0);
     }
 
-    public void setLastBit(int bit) {
-        bits.set(bits.size() - 1, (byte)bit);
+    public void setFirstBit(int bit) {
+        bits.add(0, (byte)bit);
     }
 
     public void reverse() {
