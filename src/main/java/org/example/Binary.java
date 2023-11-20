@@ -7,7 +7,7 @@ public class Binary {
     public BinaryNumber add(BinaryNumber a, BinaryNumber b) {
         if (b.size() > a.size()) {
             a.fillWithZeros(b.size());
-        } else {
+        } else if (a.size() > b.size()) {
             b.fillWithZeros(a.size());
         }
 
@@ -19,21 +19,22 @@ public class Binary {
             byte lastBitA = a.lastBit();
             byte lastBitB = b.lastBit();
 
+            a.rightShove();
+            b.rightShove();
+            result.leftShove();
+
             // Calculate sum bit
             Pair pair = bitAdder(lastBitA, lastBitB, cin);
             cin = pair.cout();
             result.setLastBit(pair.sum());
             // Trying to implement this functionality using class and OOP points. Is it OK ?
 
-            a.rightShove();
-            b.rightShove();
-            result.leftShove();
+
         }
         if (cin == 1) {
             // Add if some 1 is left in carry out bit
+            result.leftShove();
             result.setLastBit(cin);
-        } else {
-            result.rightShove();
         }
         result.reverse();
         return result;
@@ -53,7 +54,7 @@ public class Binary {
     public BinaryNumber subtract(BinaryNumber a, BinaryNumber b) {
         if (b.size() > a.size()) {
             a.fillWithZeros(b.size());
-        } else {
+        } else if (a.size() > b.size()) {
             b.fillWithZeros(a.size());
         }
         b.invert();
@@ -63,28 +64,6 @@ public class Binary {
         // Work with this overflow, delete in some cases
         res.deleteOverflow();
         return res;
-    }
-
-    public static int reverse(int num) {
-        int reversed = 0;
-
-        // Iterate through each bit in the binary representation of the number
-        while (num > 0) {
-            // Shift the reversed bits to the left and add the rightmost bit of the original number
-            reversed = (reversed << 1) | (num & 1);
-
-            // Right shift the original number to move to the next bit
-            num >>= 1;
-        }
-
-        return reversed;
-    }
-
-    public int invert(int num) {
-        int bitmask = 0b11111;
-
-        // Use bitwise XOR to invert only the last six bits
-        return num ^ bitmask;
     }
 
 }

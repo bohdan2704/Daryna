@@ -9,21 +9,25 @@ public class BinaryTest {
     void testAddition() {
         Binary binary = new Binary();
 
-        // Test addition with equal length binary strings
-        BinaryNumber addedEqualLength = binary.add(new BinaryNumber("1111"), new BinaryNumber("1111"));
-        assertEquals("11110", addedEqualLength.getBinaryString());
+        // Test addition with longer carry and different length binary strings
+        BinaryNumber addedWithCarryAndDifferentLength = binary.add(new BinaryNumber("1111"), new BinaryNumber("11"));
+        assertEquals("10000", addedWithCarryAndDifferentLength.getBinaryString());
 
-        // Test addition with different length binary strings
-        BinaryNumber addedDifferentLength = binary.add(new BinaryNumber("1111"), new BinaryNumber("111"));
-        assertEquals("10110", addedDifferentLength.getBinaryString());
+        // Test addition with leading zeros and different length binary strings
+        BinaryNumber addedWithLeadingZeros = binary.add(new BinaryNumber("0011"), new BinaryNumber("111"));
+        assertEquals("1000", addedWithLeadingZeros.getBinaryString());
 
-        // Test addition with zero
-        BinaryNumber addedWithZero = binary.add(new BinaryNumber("1101"), new BinaryNumber("0"));
-        assertEquals("1101", addedWithZero.getBinaryString());
+        // Test addition resulting in longer binary string with leading zeros
+        BinaryNumber addedLongerResultWithLeadingZeros = binary.add(new BinaryNumber("1111"), new BinaryNumber("111"));
+        assertEquals("01110", addedLongerResultWithLeadingZeros.getBinaryString());
 
-        // Test addition with longer carry
-        BinaryNumber addedWithCarry = binary.add(new BinaryNumber("1111"), new BinaryNumber("1"));
-        assertEquals("10000", addedWithCarry.getBinaryString());
+        // Test addition with zero as the first operand
+        BinaryNumber addedWithZeroAsFirstOperand = binary.add(new BinaryNumber("0"), new BinaryNumber("1010"));
+        assertEquals("1010", addedWithZeroAsFirstOperand.getBinaryString());
+
+        // Test addition with zero as the second operand
+        BinaryNumber addedWithZeroAsSecondOperand = binary.add(new BinaryNumber("1101"), new BinaryNumber("0"));
+        assertEquals("1101", addedWithZeroAsSecondOperand.getBinaryString());
     }
 
     @Test
