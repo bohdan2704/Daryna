@@ -17,7 +17,7 @@ public class GoldenSystem {
             num -= Math.pow(PHI, phiPower);
         }
 
-        return formPhiBaseNumberBasedOnPowers(powersList);
+        return formNumberInGoldenBase(powersList);
     }
 
     private static int findPhiPowerThanLessOrEqual(double num) {
@@ -30,20 +30,29 @@ public class GoldenSystem {
             }
             return k;
         }
-        else if (num < PHI) {
+
+        // If we cannot take phi^1 phi^2, phi^3 try subtract just phi^0 or simplest one :)
+        if (num - 1 > 0) {
+            return 0;
+        }
+
+        if (num < PHI) {
             k = -1; // Starting base power is 1
             phiInKPower = 1/PHI;
             double multiplier = 1/PHI;
-            while (phiInKPower*multiplier > num) {
+            while (phiInKPower * multiplier > num) {
                 phiInKPower *= multiplier;
                 k--;
             }
-            if ((int)(phiInKPower*multiplier*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
-                System.out.println((int)(phiInKPower*multiplier*UPPER_APROXIMATION) + " --- " + (int)(num*UPPER_APROXIMATION));
-                System.out.println((phiInKPower*multiplier) + " --- " + (num));
-                return k-1;
-            }
+//            if ((int)(phiInKPower*multiplier*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
+//                return k-1;
+//            }
             // Because we are working with fractional numbers, not integers
+//            if (k==-1) {
+//                return k-1;
+//            } else {
+//                return k;
+//            }
             return k;
         }
         System.out.println("It is just 1 in golden base system");
@@ -58,6 +67,11 @@ public class GoldenSystem {
             int nextPower = listOfPowers.get(i+1);
             if (currentPower == nextPower) {
                 // Catching misleading powers, they are the same because of double approximation
+                throw new RuntimeException("Powers are the same, somehow this can lead to an error!");
+            } else if (nextPower == 0) {
+                b.append("0".repeat(currentPower-1));
+                b.append("1");
+                b.append(".");
                 continue;
             }
             else if (currentPower > 0 && nextPower < 0) {
@@ -77,6 +91,31 @@ public class GoldenSystem {
         }
         b.append(1);
 
+        return b.toString();
+    }
+
+    private static String formNumberInGoldenBase(List<Integer> listOfPowers) {
+        StringBuilder b = new StringBuilder();
+
+        // We have the smallest number, lets work with it
+        int incrementValueToGetOnlyPositiveIndexes = listOfPowers.getLast();
+        if (incrementValueToGetOnlyPositiveIndexes < 0) {
+            // Always true because PHI system always has negative powers
+            listOfPowers.replaceAll(integer -> integer + -incrementValueToGetOnlyPositiveIndexes);
+        }
+
+        for (int i = listOfPowers.getFirst(); i >= 0; i--) {
+            // So we have zero index
+
+            if (listOfPowers.contains(i)) {
+                b.append(1);
+            } else {
+                b.append(0);
+            }
+            if (i == -incrementValueToGetOnlyPositiveIndexes) {
+                b.append(".");
+            }
+        }
         return b.toString();
     }
 }
