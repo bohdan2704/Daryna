@@ -1,7 +1,7 @@
-package org.example;
+package org.example.operations;
 
-public class Binary {
-    public Binary() {
+public class BinaryCalculator {
+    public BinaryCalculator() {
     }
 
     public BinaryNumber add(BinaryNumber a, BinaryNumber b) {

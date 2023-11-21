@@ -1,4 +1,6 @@
-package org.example;
+package org.example.operations;
+
+import org.example.numeric.Number;
 
 public class Calculator {
     private Number numberOne;

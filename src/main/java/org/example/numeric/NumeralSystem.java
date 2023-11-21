@@ -1,4 +1,4 @@
-package org.example;
+package org.example.numeric;
 
 public enum NumeralSystem {
     BINARY(2),

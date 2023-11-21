@@ -1,4 +1,4 @@
-package optional;
+package org.example.optional;
 
 public class Timer {
     private long startTime;

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.numeric;
 
 public class Number {
     private static final int MAX_FRACTIONAL_DIGITS = 16;
@@ -6,6 +6,13 @@ public class Number {
     private final String number;
     private final int decimalNumber;
     private FractionNumber fractionNumber;
+
+    public Number(double value) {
+        base = NumeralSystem.DECIMAL;
+        number = String.valueOf(value);
+        decimalNumber = (int)value;
+        fractionNumber = new FractionNumber(value - decimalNumber);
+    }
 
     public Number(NumeralSystem base, String value) {
         this.base = base;
@@ -104,6 +111,11 @@ public class Number {
     private static class FractionNumber {
         private final String fraction;
         private final double decimalFraction;
+
+        public FractionNumber(double fraction) {
+            this.fraction = String.valueOf(fraction);
+            this.decimalFraction = fraction;
+        }
 
         public FractionNumber(NumeralSystem base, String fraction) {
             this.fraction = fraction;
