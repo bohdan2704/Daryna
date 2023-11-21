@@ -9,9 +9,12 @@ public class Main {
     public static void main(String[] args) {
         Number number1 = new Number(NumeralSystem.HEXATRIGESIMAL_36, "0.MI");
         Number number2 = new Number(NumeralSystem.HEXATRIGESIMAL_36, "AF");
+        String goldenBaseNumber = GoldenSystem.getGoldenRatioNumber(9);
+        System.out.println("! -- " + goldenBaseNumber);
+
 
         for (int i = 2; i <= 30; i++) {
-            String goldenBaseNumber = GoldenSystem.getGoldenRatioNumber(i);
+            goldenBaseNumber = GoldenSystem.getGoldenRatioNumber(i);
             System.out.println(i + " -- " + goldenBaseNumber);
         }
 

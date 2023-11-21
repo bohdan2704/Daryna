@@ -5,8 +5,9 @@ import java.util.List;
 
 public class GoldenSystem {
     private static final double PHI = 1.618033988749894848204586834;
+    private static final double PHI_NEGATIVE = 1/PHI;
     private static final double APROXIMATION = 10E-6;
-    private static final double UPPER_APROXIMATION = 10E6;
+    private static final double UPPER_APROXIMATION = 10E3;
 
 
     public static String getGoldenRatioNumber(double num) {
@@ -32,31 +33,29 @@ public class GoldenSystem {
         }
 
         // If we cannot take phi^1 phi^2, phi^3 try subtract just phi^0 or simplest one :)
-        if (num - 1 > 0) {
-            return 0;
-        }
 
-        if (num < PHI) {
-            k = -1; // Starting base power is 1
-            phiInKPower = 1/PHI;
-            double multiplier = 1/PHI;
-            while (phiInKPower * multiplier > num) {
-                phiInKPower *= multiplier;
-                k--;
+
+        else if (num < PHI) {
+            k = 0; // Starting base power is 1
+            if (num - 1 > 0) {
+                return 0;
             }
-//            if ((int)(phiInKPower*multiplier*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
-//                return k-1;
-//            }
-            // Because we are working with fractional numbers, not integers
-//            if (k==-1) {
-//                return k-1;
-//            } else {
-//                return k;
-//            }
-            return k;
+            phiInKPower = 1;
+            do {
+                phiInKPower *= PHI_NEGATIVE;
+                k--;
+            } while ( phiInKPower * PHI_NEGATIVE > num );
+            if ((int)(phiInKPower*PHI_NEGATIVE*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
+                return k;
+            } else {
+                return k-1;
+            }
+
         }
-        System.out.println("It is just 1 in golden base system");
-        return 1;
+        else {
+            // num == PHI
+            return 1;
+        }
     }
 
     private static String formPhiBaseNumberBasedOnPowers(List<Integer> listOfPowers) {
