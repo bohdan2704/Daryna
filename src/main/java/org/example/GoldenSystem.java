@@ -5,10 +5,13 @@ import java.util.List;
 
 public class GoldenSystem {
     private static final double PHI = 1.618033988749894848204586834;
+    private static final double APROXIMATION = 10E-6;
+    private static final double UPPER_APROXIMATION = 10E6;
+
+
     public static String getGoldenRatioNumber(double num) {
         List<Integer> powersList = new ArrayList<>();
-        double aproximation = 10E-6;
-        while (num > aproximation) {
+        while (num > APROXIMATION) {
             int phiPower = findPhiPowerThanLessOrEqual(num);
             powersList.add(phiPower);
             num -= Math.pow(PHI, phiPower);
@@ -35,8 +38,13 @@ public class GoldenSystem {
                 phiInKPower *= multiplier;
                 k--;
             }
+            if ((int)(phiInKPower*multiplier*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
+                System.out.println((int)(phiInKPower*multiplier*UPPER_APROXIMATION) + " --- " + (int)(num*UPPER_APROXIMATION));
+                System.out.println((phiInKPower*multiplier) + " --- " + (num));
+                return k-1;
+            }
             // Because we are working with fractional numbers, not integers
-            return k-1;
+            return k;
         }
         System.out.println("It is just 1 in golden base system");
         return 1;
@@ -56,7 +64,9 @@ public class GoldenSystem {
                 // Same times number as power because we have 0 power too
                 b.append("0".repeat(currentPower));
                 b.append(".");
-                int numberOfZeroesAfterPoint = Math.abs(nextPower-1);
+                // Decrement one from zeroes quantity, because -1 pow does not require 0
+                // Still 1 pow require one zero before )
+                int numberOfZeroesAfterPoint = Math.abs(nextPower)-1;
                 b.append("0".repeat(numberOfZeroesAfterPoint));
                 continue;
             }
