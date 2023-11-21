@@ -45,4 +45,5 @@ public enum NumeralSystem {
     public int getBase() {
         return base;
     }
+
 }
