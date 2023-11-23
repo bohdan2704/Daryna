@@ -5,13 +5,17 @@ public class Number {
     private final NumeralSystem base;
     private final String number;
     private final int decimalNumber;
-    private FractionNumber fractionNumber;
+    private final FractionNumber fractionNumber;
 
     public Number(double value) {
         base = NumeralSystem.DECIMAL;
         number = String.valueOf(value);
         decimalNumber = (int)value;
-        fractionNumber = new FractionNumber(value - decimalNumber);
+        if (value - decimalNumber > 0) {
+            fractionNumber = new FractionNumber(value - decimalNumber);
+        } else {
+            fractionNumber = new FractionNumber();
+        }
     }
 
     public Number(NumeralSystem base, String value) {
@@ -120,6 +124,11 @@ public class Number {
         public FractionNumber(NumeralSystem base, String fraction) {
             this.fraction = fraction;
             decimalFraction = toDecimal(base.getBase());
+        }
+
+        public FractionNumber() {
+            fraction = "";
+            decimalFraction = 0;
         }
 
         private double toDecimal(int base) {
