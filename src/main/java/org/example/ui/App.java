@@ -2,6 +2,9 @@ package org.example.ui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import org.example.alternative.AlternativeNumeralSystem;
+import org.example.alternative.FibonacciSystem;
+import org.example.alternative.FractionalSystem;
+import org.example.alternative.NumeralSystemInterface;
 import org.example.numeric.Number;
 import org.example.numeric.NumeralSystem;
 
@@ -12,7 +15,14 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class App {
+    // Set the Command Pattern
+    private static final HashMap<AlternativeNumeralSystem, NumeralSystemInterface> commandMap = new HashMap<>();
 
+    static {
+        commandMap.put(AlternativeNumeralSystem.FIBONACCI_SYSTEM, new FibonacciSystem());
+        commandMap.put(AlternativeNumeralSystem.FRACTIONAL_SYSTEM, new FractionalSystem());
+
+    }
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -20,14 +30,11 @@ public class App {
             throw new RuntimeException("Error when starting flat", e);
         }
         SwingUtilities.invokeLater(App::createAndShowGUI);
-
-        // Set the Command Pattern
-        HashMap<AlternativeNumeralSystem, > commandMap =
     }
 
     private static void createAndShowGUI() {
         // Create and set up the frame
-        JFrame frame = new JFrame("Taschenrechner");
+        JFrame frame = new JFrame("Zungenbrecher");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400); // Increased frame size
 
@@ -90,8 +97,10 @@ public class App {
                 NumeralSystem numeralSystem1 = (NumeralSystem) numeralSystemJComboBox1.getSelectedItem();
                 System.out.println("Selected Color: " + numeralSystem1);
 
-                NumeralSystem numeralSystem2 = (NumeralSystem) numeralSystemJComboBox2.getSelectedItem();
-                System.out.println("Selected Color: " + numeralSystem2);
+                AlternativeNumeralSystem numeralSystem2 = (AlternativeNumeralSystem) numeralSystemJComboBox2.getSelectedItem();
+                double inputValue = Double.parseDouble(textField.getText());
+                String numInAlternativeSystem = commandMap.get(numeralSystem2).toBase(inputValue);
+                double outputValue = commandMap.get(numeralSystem2).fromBase(numInAlternativeSystem);
             }
         });
 

@@ -3,7 +3,7 @@ package org.example.alternative;
 import org.example.numeric.NumeralSystem;
 import org.example.numeric.Number;
 
-public class FractionalSystem {
+public class FractionalSystem implements NumeralSystemInterface {
     private static final int precision = 16; // Precision is pow of 10
 
     public String getNumberInNM(double doubleNum, int n, int m) {
@@ -61,6 +61,11 @@ public class FractionalSystem {
         }
 
         return result.toString();
+    }
+
+    @Override
+    public String toBase(double num) {
+        return null;
     }
 
     public double fromBase(String num, double base) {
