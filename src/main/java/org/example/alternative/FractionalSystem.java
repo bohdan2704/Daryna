@@ -41,6 +41,7 @@ public class FractionalSystem implements NumeralSystemInterface {
         return b.toString();
     }
 
+    @Override
     public String toBase(double n, double b) {
         // Checking if base nearly equals SQRT(2)
         // Then use special formula
@@ -64,10 +65,6 @@ public class FractionalSystem implements NumeralSystemInterface {
     }
 
     @Override
-    public String toBase(double num) {
-        return null;
-    }
-
     public double fromBase(String num, double base) {
         String[] numberSplit = num.split("\\.");
         int numberLength = numberSplit[0].length();

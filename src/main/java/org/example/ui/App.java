@@ -10,8 +10,8 @@ import org.example.numeric.NumeralSystem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 import java.util.HashMap;
 
 public class App {
@@ -40,15 +40,22 @@ public class App {
 
         // Use GridBagLayout for centering components
         frame.setLayout(new GridBagLayout());
+        // Set background color
+        frame.getContentPane().setBackground(new Color(207, 245, 207)); // Light green background
+
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Create components
         JTextField textField = new JTextField(15);
+        addHint(textField, "Enter number in decimal");
+
+        // Should be filled only when using Fractional DB
+        JTextField textFieldOptionalBase = new JTextField(15);
+        addHint(textFieldOptionalBase, "Enter base (only for fractional system)");
+
         JButton button = new JButton("Click Me");
         JLabel label = new JLabel("Result:");
 
-        // Set background color
-        frame.getContentPane().setBackground(new Color(200, 255, 200)); // Light green background
 
         // Set up constraints for text field
         gbc.gridx = 0;
@@ -58,22 +65,26 @@ public class App {
         gbc.fill = GridBagConstraints.HORIZONTAL; // Make components expand horizontally
         frame.add(textField, gbc);
 
+        gbc.gridy = 1;
+        frame.add(textFieldOptionalBase, gbc);
+
+        gbc.gridy = 2;
         // Create a JComboBox for the enum
         JComboBox<NumeralSystem> numeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
         JComboBox<AlternativeNumeralSystem> numeralSystemJComboBox2 = new JComboBox<>(AlternativeNumeralSystem.values());
 
         // Set up constraints for the combo box
-        gbc.gridy = 2;
-        frame.add(numeralSystemJComboBox1, gbc);
         gbc.gridy = 3;
+        frame.add(numeralSystemJComboBox1, gbc);
+        gbc.gridy = 4;
         frame.add(numeralSystemJComboBox2, gbc);
 
         // Set up constraints for label
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         frame.add(label, gbc);
 
         // Set up constraints for button
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         frame.add(button, gbc);
 
 
@@ -99,8 +110,13 @@ public class App {
 
                 AlternativeNumeralSystem numeralSystem2 = (AlternativeNumeralSystem) numeralSystemJComboBox2.getSelectedItem();
                 double inputValue = Double.parseDouble(textField.getText());
-                String numInAlternativeSystem = commandMap.get(numeralSystem2).toBase(inputValue);
-                double outputValue = commandMap.get(numeralSystem2).fromBase(numInAlternativeSystem);
+                double baseInputValue = 0;
+                if (!textFieldOptionalBase.getText().isEmpty()) {
+                    baseInputValue = Double.parseDouble(textFieldOptionalBase.getText());
+                }
+
+                String numInAlternativeSystem = commandMap.get(numeralSystem2).toBase(inputValue, baseInputValue);
+                double outputValue = commandMap.get(numeralSystem2).fromBase(numInAlternativeSystem, baseInputValue);
             }
         });
 
@@ -109,5 +125,28 @@ public class App {
 
         // Set the frame visibility to true
         frame.setVisible(true);
+    }
+
+    private static void addHint(final JTextField textField, final String hint) {
+        textField.setText(hint);
+        textField.setForeground(Color.GRAY);
+
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(hint)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText(hint);
+                    textField.setForeground(Color.GRAY);
+                }
+            }
+        });
     }
 }

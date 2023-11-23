@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FibonacciSystem implements NumeralSystemInterface {
-    public String toBase(double num) {
+    @Override
+    public String toBase(double num, double base) {
         List<Integer> fibIndexesList = new ArrayList<>();
         while (num > 0) {
             int fibIndex = getIndexOfFibLessOrEqualThan((int)num);
@@ -18,7 +19,7 @@ public class FibonacciSystem implements NumeralSystemInterface {
     }
 
     @Override
-    public double fromBase(String fibNum) {
+    public double fromBase(String fibNum, double base) {
         StringBuilder fibs = new StringBuilder(fibNum).reverse();
         // Base are not used here
         // Create an array to store Fibonacci numbers
