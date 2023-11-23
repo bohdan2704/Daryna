@@ -7,5 +7,6 @@ public enum AlternativeNumeralSystem {
     FRACTIONAL_SYSTEM,
     FIBONACCI_SYSTEM,
     IMPERIAL_SYSTEM,
+    BINARY_DECIMAL_SYSTEM,
     UNARY_SYSTEM;
 }

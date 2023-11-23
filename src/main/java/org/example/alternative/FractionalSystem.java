@@ -1,19 +1,20 @@
 package org.example.alternative;
 
-public class FractionalSystem {
-    // Working with N/M fractional system
-    public static final int N = 3;
-    public static final int M = 2;
-    private static final int DELTA = N-M;
+import org.example.numeric.Number;
+import org.example.numeric.NumeralSystem;
 
-    public String getNumberInNMAlternativeBase(double doubleNum) {
+public class FractionalSystem {
+    private static final int precision = 16; // Precision is pow of 10
+
+    public String getNumberInNM(double doubleNum, int n, int m) {
+        int delta = n-m;
         int num = (int)doubleNum;
         StringBuilder b = new StringBuilder();
         while (num > 0) {
             int iterator = 0;
-            while (num-N >= 0) {
-                iterator += N-DELTA;
-                num -= N;
+            while (num-n >= 0) {
+                iterator += n-delta;
+                num -= n;
             }
             b.insert(0, num);
             num = iterator;
@@ -21,7 +22,31 @@ public class FractionalSystem {
         return b.toString();
     }
 
-    public String toBase(double n, double b, int precision) {
+    public String squareRootToBase(double number) {
+        Number num = new Number(number);
+        String binaryNumber = num.toSpecifiedNumeralSystem(NumeralSystem.BINARY);
+        System.out.println(binaryNumber);
+
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < binaryNumber.length(); i++) {
+            if (binaryNumber.charAt(i) == '.') {
+                b.deleteCharAt(b.length() - 1);
+                b.deleteCharAt(b.length() - 1);
+                b.deleteCharAt(b.length() - 1);
+                // Remove zero that was added right before point
+                // Because SQRT^0 is 1 in any system, we don't need to double this buddy
+            }
+            b.append(binaryNumber.charAt(i)).append(0);
+        }
+        return b.toString();
+    }
+
+    public String toBase(double n, double b) {
+        // Checking if base nearly equals SQRT(2)
+        // Then use special formula
+        if ( Math.abs(b - Math.sqrt(2)) < 10E3) {
+            return squareRootToBase(n);
+        }
         int k = (int) Math.floor(Math.log(n) / Math.log(b)) + 1;
         StringBuilder result = new StringBuilder();
 

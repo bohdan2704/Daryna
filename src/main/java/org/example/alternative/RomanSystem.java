@@ -35,6 +35,8 @@ public class RomanSystem {
         };
     }
 
+    // Not as efficient and as readable as iterative version
+    // We don't have string builder here and overall recursion works longer than loop
     public String toBaseRecursive(int numToRoman) {
        // Checking some base cases
         if (numToRoman < 0) {

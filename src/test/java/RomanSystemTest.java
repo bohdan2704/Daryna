@@ -1,3 +1,4 @@
+import org.example.optional.Timer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.example.alternative.RomanSystem;
@@ -180,7 +181,11 @@ public class RomanSystemTest {
         assertEquals("IV", romanSystem.toBase(4));
         assertEquals("IX", romanSystem.toBase(9));
         assertEquals("XLIX", romanSystem.toBase(49));
-        assertEquals("MMMCMXCIX", romanSystem.toBase(3999));
+
+        Timer timer = new Timer();
+        timer.startTimer();
+        assertEquals("MMMCMXCIX", romanSystem.toBaseRecursive(3999));
+        timer.stopTimer();
 
         // Additional test cases
         assertEquals("CDXCIX", romanSystem.toBase(499));

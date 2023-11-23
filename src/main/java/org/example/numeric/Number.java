@@ -63,9 +63,10 @@ public class Number {
             throw new IllegalArgumentException("Base must be between 2 and 36");
         }
 
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder("0");
 
         while (decimalNumber > 0) {
+            result.delete(0,0);
             int remainder = decimalNumber % base.getBase();
             result.insert(0, getCharForDigit(remainder));
             decimalNumber /= base.getBase();
