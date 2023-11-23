@@ -54,21 +54,21 @@ public class RomanSystem {
     }
 
     public String toBase(int numToRoman) {
+        StringBuilder b = new StringBuilder();
         // Checking some base cases
-        if (numToRoman < 0) {
-            return null;
+        if (numToRoman < 0 || numToRoman > 3999) {
+            throw new ArithmeticException("Non convertable to imperial system");
         }
-        if (numToRoman > 3999) {
-            return null;
-        }
-        while ()
-        for (Integer currentNumber : DECIMAL_TO_ROMAN_TABLE.keySet()) {
-            if (numToRoman > 0 && numToRoman >= currentNumber) {
-                numToRoman -= currentNumber;
-                return DECIMAL_TO_ROMAN_TABLE.get(currentNumber) + toBase(numToRoman);
+        while (numToRoman > 0) {
+            for (Integer currentNumber : DECIMAL_TO_ROMAN_TABLE.keySet()) {
+                if (numToRoman >= currentNumber) {
+                    numToRoman -= currentNumber;
+                    b.append(DECIMAL_TO_ROMAN_TABLE.get(currentNumber));
+                    break;
+                }
             }
         }
-        return "";
+        return b.toString();
     }
 
     public int fromBase(String romanNum) {

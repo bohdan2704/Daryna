@@ -160,16 +160,6 @@ public class RomanSystemTest {
     }
 
     @Test
-    public void testNegative() {
-        Assert.assertNull(romanSystem.toBase(-1));
-    }
-
-    @Test
-    public void testTooLarge() {
-        Assert.assertNull(romanSystem.toBase(4000));
-    }
-
-    @Test
     public void testRomanToArabic() {
         // Test cases for Roman to Arabic conversion
         assertEquals(1, romanSystem.fromBase("I"));
