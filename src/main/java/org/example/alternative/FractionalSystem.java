@@ -1,7 +1,7 @@
 package org.example.alternative;
 
-import org.example.numeric.Number;
 import org.example.numeric.NumeralSystem;
+import org.example.numeric.Number;
 
 public class FractionalSystem {
     private static final int precision = 16; // Precision is pow of 10
