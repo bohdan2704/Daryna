@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FibonacciSystem implements NumeralSystemInterface {
+    public static int findFib(int n) {
+        float fibo = 2.078087F * (float) Math.log(n) + 1.672276F;
+
+        // returning rounded off value of index
+        return Math.round(fibo);
+    }
+
     @Override
     public String toBase(double doubleNum) {
         int num = (int) doubleNum;
         List<Integer> fibIndexesList = new ArrayList<>();
         while (num > 0) {
-            int fibIndex = getIndexOfFibLessOrEqualThan((int)num);
+            int fibIndex = getIndexOfFibLessOrEqualThan(num);
             fibIndexesList.add(fibIndex);
             int fibNumber = fibonacciRecursive(fibIndex);
             num -= fibNumber;
@@ -30,13 +37,13 @@ public class FibonacciSystem implements NumeralSystemInterface {
         long decimalEquivalent = 0;
         int digit = Character.getNumericValue(fibs.charAt(0));
         if (digit == 1) {
-            decimalEquivalent+=prevFib;
+            decimalEquivalent += prevFib;
             fibs.deleteCharAt(0);
             long t = prevFib;
             prevFib = currentFib;
             currentFib = t + currentFib;
         }
-        while (!fibs.isEmpty()){
+        while (!fibs.isEmpty()) {
             digit = Character.getNumericValue(fibs.charAt(0));
             if (digit == 1) {
                 decimalEquivalent += prevFib;
@@ -58,12 +65,13 @@ public class FibonacciSystem implements NumeralSystemInterface {
             fib = fibonacciRecursive(k);
         }
 
-        if ( fib == num ) {
+        if (fib == num) {
             return k;
         } else {
-            return k-1;
+            return k - 1;
         }
     }
+
     private int fibonacciRecursive(int n) {
         if (n == 0) {
             return 1;
@@ -72,14 +80,6 @@ public class FibonacciSystem implements NumeralSystemInterface {
         } else {
             return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
         }
-    }
-
-    public static int findFib(int n)
-    {
-        float fibo = 2.078087F * (float) Math.log(n) + 1.672276F;
-
-        // returning rounded off value of index
-        return Math.round(fibo);
     }
 
     private String formNumberBasedOnPowers(List<Integer> listOfPowers) {

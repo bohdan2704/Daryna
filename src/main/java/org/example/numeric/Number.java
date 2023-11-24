@@ -1,10 +1,11 @@
 package org.example.numeric;
+
 public class Number {
     private final IntegerPart integerPart;
     private final FractionPart fractionPart;
 
     public Number(double value) {
-        integerPart = new IntegerPart((int)value);
+        integerPart = new IntegerPart((int) value);
         fractionPart = new FractionPart(value - (int) value);
     }
 
@@ -30,18 +31,13 @@ public class Number {
         return integerPart.toDecimal() + fractionPart.toDecimal();
     }
 
-    public String getValue() {
-        // Integer and fractional part  separated by hyphens
-        return integerPart.getIntegerPart() + " -- " + fractionPart.getFractionPart();
-    }
-
     public String toSpecifiedNumeralSystem(NumeralSystem numeralSystem) {
         String intStr = integerPart.toSpecifiedNumeralSystem(numeralSystem);
         String frStr = fractionPart.toSpecifiedNumeralSystem(numeralSystem);
         String wholeNumber = intStr + frStr;
         if (wholeNumber.charAt(0) == '.') {
             return "0" + wholeNumber;
-        } else if (wholeNumber.charAt(wholeNumber.length()-1) == '.') {
+        } else if (wholeNumber.charAt(wholeNumber.length() - 1) == '.') {
             return wholeNumber + "0";
         } else {
             return wholeNumber;

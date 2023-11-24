@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GoldenSystem implements NumeralSystemInterface {
     public static final double PHI = 1.618033988749894848204586834;
-    private static final double PHI_NEGATIVE = 1/PHI;
+    private static final double PHI_NEGATIVE = 1 / PHI;
     private static final double APROXIMATION = 10E-3;
     private static final double UPPER_APROXIMATION = 10E3;
 
@@ -31,7 +31,7 @@ public class GoldenSystem implements NumeralSystemInterface {
         int k = 1; // Starting base power is 1
         double phiInKPower = PHI;
         if (num > PHI) {
-            while (phiInKPower*PHI < num) {
+            while (phiInKPower * PHI < num) {
                 phiInKPower *= PHI;
                 k++;
             }
@@ -45,16 +45,15 @@ public class GoldenSystem implements NumeralSystemInterface {
             k = 0;
             phiInKPower = 1;
             // Catching 0 power base, then continue to -1
-            while ( num - phiInKPower < 0 ) {
-                if ((int)(phiInKPower*UPPER_APROXIMATION) == (int)(num*UPPER_APROXIMATION)) {
+            while (num - phiInKPower < 0) {
+                if ((int) (phiInKPower * UPPER_APROXIMATION) == (int) (num * UPPER_APROXIMATION)) {
                     return k;
                 }
                 phiInKPower *= PHI_NEGATIVE;
                 k--;
             }
             return k;
-        }
-        else {
+        } else {
             return 1;
         }
     }

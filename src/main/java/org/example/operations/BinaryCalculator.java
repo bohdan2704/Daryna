@@ -11,10 +11,10 @@ public class BinaryCalculator {
             b.fillWithZeros(a.size());
         }
 
-        BinaryNumber result = new BinaryNumber("0".repeat(a.size()+1));
+        BinaryNumber result = new BinaryNumber("0".repeat(a.size() + 1));
         int cin = 0;
         int len = a.size();
-        for (int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             // Equivalent of 0 OR -- 1 AND
             byte lastBitA = a.lastBit();
             byte lastBitB = b.lastBit();
@@ -55,10 +55,7 @@ public class BinaryCalculator {
             b.fillWithZeros(a.size());
         }
 
-        boolean resultIsLessThanZero = true;
-        if (b.isLessThan(a)) {
-            resultIsLessThanZero = false;
-        }
+        boolean resultIsLessThanZero = !b.isLessThan(a);
 
         b.invert();
         b = add(b, new BinaryNumber("1"));

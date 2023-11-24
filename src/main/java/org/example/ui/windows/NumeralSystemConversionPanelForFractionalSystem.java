@@ -10,7 +10,7 @@ public class NumeralSystemConversionPanelForFractionalSystem extends Panel imple
     private final JTextField textField;
     private final JTextField fractionalBase;
     private final JLabel resultLabelForFractionalSystem;
-    private JButton convertButton;
+    private final JButton convertButton;
 
     public NumeralSystemConversionPanelForFractionalSystem() {
         setLayout(new GridBagLayout());
@@ -22,10 +22,10 @@ public class NumeralSystemConversionPanelForFractionalSystem extends Panel imple
         addComponent(textField, gbc, 0, 0);
 
         fractionalBase = new HintTextField("Enter base (only for fractional system)");
-        addComponent(fractionalBase, gbc,0, 1);
+        addComponent(fractionalBase, gbc, 0, 1);
 
         resultLabelForFractionalSystem = new JLabel("Number in alternative base: ");
-        addComponent(resultLabelForFractionalSystem, gbc, 0,5);
+        addComponent(resultLabelForFractionalSystem, gbc, 0, 5);
 
         convertButton = new JButton("Convert");
         addComponent(convertButton, gbc, 0, 6);

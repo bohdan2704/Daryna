@@ -23,13 +23,13 @@ public class BinaryCalculatorPanel extends Panel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         aTextField = new HintTextField("Enter A value");
-        addComponent(aTextField, gbc,0, 1);
+        addComponent(aTextField, gbc, 0, 1);
 
         bTextField = new HintTextField("Enter B value");
-        addComponent(bTextField, gbc,0, 2);
+        addComponent(bTextField, gbc, 0, 2);
 
         result = new JLabel("Number in alternative base: ");
-        addComponent(result, gbc, 0,3);
+        addComponent(result, gbc, 0, 3);
 
         addButton = new JButton("+");
         addComponent(addButton, gbc, 0, 4);

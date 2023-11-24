@@ -36,6 +36,7 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
 
         setPreferredSize(new Dimension(400, 300));
     }
+
     @Override
     public void performConversion() {
         double inputValue = Double.parseDouble(textField.getText());

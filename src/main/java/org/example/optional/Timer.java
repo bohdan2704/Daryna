@@ -2,6 +2,7 @@ package org.example.optional;
 
 public class Timer {
     private long startTime;
+
     public void startTimer() {
         startTime = System.nanoTime();
     }

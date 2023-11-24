@@ -11,7 +11,7 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends Panel impl
     private final JTextField textField;
     private final JComboBox<AlternativeNumeralSystem> alternativeNumeralSystemJComboBox;
     private final JLabel resultLabelForAlternativeSystem;
-    private JButton convertButton;
+    private final JButton convertButton;
 
     public NumeralSystemConversionPanelForAlternativeSystem() {
         setLayout(new GridBagLayout());
@@ -23,10 +23,10 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends Panel impl
         addComponent(textField, gbc, 0, 0);
 
         alternativeNumeralSystemJComboBox = new JComboBox<>(AlternativeNumeralSystem.values());
-        addComponent(alternativeNumeralSystemJComboBox, gbc, 0,3);
+        addComponent(alternativeNumeralSystemJComboBox, gbc, 0, 3);
 
         resultLabelForAlternativeSystem = new JLabel("Number in alternative base: ");
-        addComponent(resultLabelForAlternativeSystem, gbc, 0,5);
+        addComponent(resultLabelForAlternativeSystem, gbc, 0, 5);
 
         convertButton = new JButton("Convert");
         addComponent(convertButton, gbc, 0, 6);

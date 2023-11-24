@@ -15,12 +15,11 @@ public class SquareRootBase implements NumeralSystemInterface {
         for (int i = 0; i < binaryNumber.length(); i++) {
             // Remove zero that was added right before the point
             // Because SQRT^0 is 1 in any system, we don't need to double this buddy
-            if (i + 1 < binaryNumber.length() && binaryNumber.charAt(i+1) == '.') {
+            if (i + 1 < binaryNumber.length() && binaryNumber.charAt(i + 1) == '.') {
                 b.append(binaryNumber.charAt(i));
             } else if (binaryNumber.charAt(i) == '.') {
                 b.append(binaryNumber.charAt(i));
-            }
-            else {
+            } else {
                 b.append(binaryNumber.charAt(i)).append(0);
             }
         }

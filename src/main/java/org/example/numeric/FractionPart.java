@@ -1,4 +1,3 @@
-
 package org.example.numeric;
 
 public class FractionPart implements NumberPart {

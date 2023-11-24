@@ -5,5 +5,5 @@ public enum AlternativeNumeralSystem {
     SQUARE_ROOT_SYSTEM,
     FIBONACCI_SYSTEM,
     IMPERIAL_SYSTEM,
-    UNARY_SYSTEM;
+    UNARY_SYSTEM
 }

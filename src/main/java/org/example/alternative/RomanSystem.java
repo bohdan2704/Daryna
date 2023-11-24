@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class RomanSystem implements NumeralSystemInterface {
     private static final Map<Integer, String> DECIMAL_TO_ROMAN_TABLE = new LinkedHashMap<>();
+
     static {
         DECIMAL_TO_ROMAN_TABLE.put(1000, "M");
         DECIMAL_TO_ROMAN_TABLE.put(900, "CM");
@@ -37,7 +38,7 @@ public class RomanSystem implements NumeralSystemInterface {
     // Not as efficient and as readable as iterative version
     // We don't have string builder here and overall recursion works longer than loop
     public String toBaseRecursive(int numToRoman) {
-       // Checking some base cases
+        // Checking some base cases
         if (numToRoman < 0) {
             return null;
         }

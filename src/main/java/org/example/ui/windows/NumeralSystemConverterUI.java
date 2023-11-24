@@ -1,12 +1,7 @@
 package org.example.ui.windows;
 
-import org.example.alternative.AlternativeNumeralSystem;
-import org.example.alternative.FibonacciSystem;
-import org.example.alternative.NumeralSystemInterface;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 
 public class NumeralSystemConverterUI {
     public static void createAndShowGUI() {

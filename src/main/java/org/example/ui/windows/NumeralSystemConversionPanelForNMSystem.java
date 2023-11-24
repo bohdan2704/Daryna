@@ -1,6 +1,5 @@
 package org.example.ui.windows;
 
-import org.example.fractional.FractionalSystem;
 import org.example.nmbased.BaseNM;
 import org.example.ui.elements.HintTextField;
 
@@ -12,7 +11,7 @@ public class NumeralSystemConversionPanelForNMSystem extends Panel implements Co
     private final JTextField nTextField;
     private final JTextField mTextField;
     private final JLabel resultLabelForFractionalSystem;
-    private JButton convertButton;
+    private final JButton convertButton;
 
     public NumeralSystemConversionPanelForNMSystem() {
         setLayout(new GridBagLayout());
@@ -24,13 +23,13 @@ public class NumeralSystemConversionPanelForNMSystem extends Panel implements Co
         addComponent(textField, gbc, 0, 0);
 
         nTextField = new HintTextField("Enter N");
-        addComponent(nTextField, gbc,0, 1);
+        addComponent(nTextField, gbc, 0, 1);
 
         mTextField = new HintTextField("Enter M");
-        addComponent(mTextField, gbc,0, 2);
+        addComponent(mTextField, gbc, 0, 2);
 
         resultLabelForFractionalSystem = new JLabel("Number in alternative base: ");
-        addComponent(resultLabelForFractionalSystem, gbc, 0,3);
+        addComponent(resultLabelForFractionalSystem, gbc, 0, 3);
 
         convertButton = new JButton("Convert");
         addComponent(convertButton, gbc, 0, 4);
@@ -43,9 +42,9 @@ public class NumeralSystemConversionPanelForNMSystem extends Panel implements Co
 
     @Override
     public void performConversion() {
-        int inputValue = (int)Double.parseDouble(textField.getText());
-        int nValue = (int)Double.parseDouble(nTextField.getText());
-        int mValue = (int)Double.parseDouble(mTextField.getText());
+        int inputValue = (int) Double.parseDouble(textField.getText());
+        int nValue = (int) Double.parseDouble(nTextField.getText());
+        int mValue = (int) Double.parseDouble(mTextField.getText());
 
         if (nValue <= mValue) {
             resultLabelForFractionalSystem.setText("N must be greater than M. So the base will be > 1");
