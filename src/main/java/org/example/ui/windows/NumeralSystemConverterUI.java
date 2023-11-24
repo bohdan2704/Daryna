@@ -19,11 +19,18 @@ public class NumeralSystemConverterUI {
         tabbedPane.addTab("Alternative Systems", createConversionPanelForAlternativeSystem()); // Add a duplicate panel
         tabbedPane.addTab("Fractional System", createConversionPanelForFractionalSystem()); // Add a duplicate panel
         tabbedPane.addTab("NM System", createConversionPanelForNMSystem()); // Add a duplicate panel
+        tabbedPane.addTab("Calculator", createCalculatorPanel()); // Add a duplicate panel
 
         frame.add(tabbedPane);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static Component createCalculatorPanel() {
+        BinaryCalculatorPanel calculatorPanel = new BinaryCalculatorPanel();
+        calculatorPanel.setBackground(new Color(192, 176, 234));
+        return calculatorPanel;
     }
 
     private static Component createConversionPanelForNMSystem() {

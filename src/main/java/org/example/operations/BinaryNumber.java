@@ -45,10 +45,6 @@ public class BinaryNumber {
         bits.add(0, (byte)bit);
     }
 
-    public void reverse() {
-        bits = bits.reversed();
-    }
-
     public void fillWithZeros(int len) {
         int currentSize = bits.size();
         int zerosToAdd = len - currentSize;
@@ -84,19 +80,85 @@ public class BinaryNumber {
 
     public String getBinaryString() {
         StringBuilder builder = new StringBuilder();
-        boolean previouslyWereJustZeroes = true;
+//        boolean previouslyWereJustZeroes = true;
         for (byte b : bits) {
-            if (previouslyWereJustZeroes && b == 1) {
-                previouslyWereJustZeroes = false;
-            }
-            if ( !previouslyWereJustZeroes) {
+//            if (previouslyWereJustZeroes && b == 1) {
+//                previouslyWereJustZeroes = false;
+//            }
+//            if ( !previouslyWereJustZeroes) {
                 builder.append(b);
-            }
+//            }
         }
         if (builder.isEmpty()) {
             return "0";
         }
         return builder.toString();
+    }
+
+    private static int binaryToDecimal(String binary) {
+        int decimal = 0;
+        int power = 0;
+
+        // Iterate through the binary string from right to left
+        for (int i = binary.length() - 1; i >= 0; i--) {
+            char digit = binary.charAt(i);
+
+            // Convert the character to an integer
+            int bitValue = Character.getNumericValue(digit);
+
+            // Add the bit value multiplied by 2^power to the decimal result
+            decimal += (int) (bitValue * Math.pow(2, power));
+
+            // Increment the power for the next iteration
+            power++;
+        }
+
+        return decimal;
+    }
+
+    public int getDecimal(boolean ... showOnlyAbsoluteValue) {
+        String binary = getBinaryString();
+        // If we passed some value (true or false) -- we provide only absolute value
+        if (showOnlyAbsoluteValue.length>0) {
+            return binaryToDecimal(binary);
+        }
+
+        if (binary.charAt(0) == '0') {
+            return binaryToDecimal(binary);
+        } else {
+            return twoComplementToDecimal(binary);
+        }
+    }
+
+    private static int twoComplementToDecimal(String binary) {
+        int result;
+
+        if (binary.charAt(0) == '0') {
+            // Positive number, convert as usual
+            result = Integer.parseInt(binary, 2);
+        } else {
+            // Negative number
+            // Invert all bits
+            StringBuilder invertedBinary = new StringBuilder();
+            for (char bit : binary.toCharArray()) {
+                invertedBinary.append(bit == '0' ? '1' : '0');
+            }
+
+            // Add 1 to the inverted binary
+            StringBuilder incrementedBinary = new StringBuilder();
+            int carry = 1;
+            for (int i = invertedBinary.length() - 1; i >= 0; i--) {
+                char currentBit = invertedBinary.charAt(i);
+                int sum = (currentBit - '0') + carry;
+                incrementedBinary.insert(0, sum % 2);
+                carry = sum / 2;
+            }
+
+            // Convert the incremented binary to decimal and apply the negative sign
+            result = -Integer.parseInt(incrementedBinary.toString(), 2);
+        }
+
+        return result;
     }
 
     public boolean isLessThan(BinaryNumber compareWith) {

@@ -54,6 +54,7 @@ public class BinaryCalculator {
         } else if (a.size() > b.size()) {
             b.fillWithZeros(a.size());
         }
+
         boolean resultIsLessThanZero = true;
         if (b.isLessThan(a)) {
             resultIsLessThanZero = false;
@@ -66,8 +67,11 @@ public class BinaryCalculator {
         // Work with this overflow, delete in some cases
         if (!resultIsLessThanZero) {
             res.deleteOverflow();
+            // Add 0 to show that number is positive
+            res.setFirstBit(0);
+            return res;
         }
+        // Keep 1 as first bit to show that number is negative
         return res;
     }
-
 }
