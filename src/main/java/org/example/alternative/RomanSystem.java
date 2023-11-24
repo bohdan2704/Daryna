@@ -54,7 +54,8 @@ public class RomanSystem implements NumeralSystemInterface {
         return "";
     }
 
-    public String toBase(int numToRoman) {
+    public String toBase(double doubleNum) {
+        int numToRoman = (int) doubleNum;
         StringBuilder b = new StringBuilder();
         // Checking some base cases
         if (numToRoman < 0 || numToRoman > 3999) {
@@ -72,7 +73,7 @@ public class RomanSystem implements NumeralSystemInterface {
         return b.toString();
     }
 
-    public int fromBase(String romanNum) {
+    public double fromBase(String romanNum) {
         // Initialize result
         int res = 0;
 

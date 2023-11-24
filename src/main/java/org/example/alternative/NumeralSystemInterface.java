@@ -1,6 +1,6 @@
 package org.example.alternative;
 
 public interface NumeralSystemInterface {
-    String toBase(int num);
-    int fromBase(String num);
+    String toBase(double num);
+    double fromBase(String num);
 }

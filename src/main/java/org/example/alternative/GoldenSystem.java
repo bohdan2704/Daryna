@@ -10,15 +10,21 @@ public class GoldenSystem implements NumeralSystemInterface {
     private static final double UPPER_APROXIMATION = 10E3;
 
     @Override
-    public String toBase(int num) {
+    public String toBase(double num) {
+        double doubleNum = num;
         List<Integer> powersList = new ArrayList<>();
-        while (num > APROXIMATION) {
-            int phiPower = findPhiPowerThanLessOrEqual(num);
+        while (doubleNum > APROXIMATION) {
+            int phiPower = findPhiPowerThanLessOrEqual(doubleNum);
             powersList.add(phiPower);
-            num -= Math.pow(PHI, phiPower);
+            doubleNum -= Math.pow(PHI, phiPower);
         }
 
         return formNumberBasedOnPowers(powersList);
+    }
+
+    @Override
+    public double fromBase(String num) {
+        return FromBase.fromBase(num, PHI);
     }
 
     private int findPhiPowerThanLessOrEqual(double num) {

@@ -56,14 +56,8 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel imp
         // Working with alternative numeral system, converting numbers
         AlternativeNumeralSystem alternativeNumeralSystem = (AlternativeNumeralSystem) alternativeNumeralSystemJComboBox.getSelectedItem();
 
-        // Getting base (only for fractional system)
-        double baseInputValue = 0;
-        if (alternativeNumeralSystem == AlternativeNumeralSystem.FRACTIONAL_SYSTEM) {
-            baseInputValue = Double.parseDouble(textFieldOptionalBase.getText());
-        }
-
-        String numInAlternativeSystem = NumeralSystemAlgorithms.convert(alternativeNumeralSystem, (int) inputValue);
-        double reverseConvertForAlternative = NumeralSystemAlgorithms.reverseConvert(alternativeNumeralSystem, numInAlternativeSystem, baseInputValue);
+        String numInAlternativeSystem = NumeralSystemAlgorithms.convert(alternativeNumeralSystem, inputValue);
+        double reverseConvertForAlternative = NumeralSystemAlgorithms.reverseConvert(alternativeNumeralSystem, numInAlternativeSystem);
 
         // Setting the result to our beautiful label
         resultLabelForAlternativeSystem.setText(alternativeNumeralSystem + " " + numInAlternativeSystem + " -- " + reverseConvertForAlternative);

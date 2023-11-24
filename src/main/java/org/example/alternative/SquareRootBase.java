@@ -5,7 +5,7 @@ import org.example.numeric.NumeralSystem;
 
 public class SquareRootBase implements NumeralSystemInterface {
     @Override
-    public String toBase(int number) {
+    public String toBase(double number) {
         Number num = new Number(number);
         String binaryNumber = num.toSpecifiedNumeralSystem(NumeralSystem.BINARY);
         System.out.println(binaryNumber);
@@ -26,5 +26,10 @@ public class SquareRootBase implements NumeralSystemInterface {
         }
         // Now we shoud refactor the number a little
         return b.toString();
+    }
+
+    @Override
+    public double fromBase(String num) {
+        return FromBase.fromBase(num, Math.sqrt(2));
     }
 }

@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.alternative.FractionalSystem;
 import org.example.numeric.NumeralSystem;
 import org.example.numeric.Number;
 import org.example.optional.Timer;
@@ -25,7 +24,6 @@ public class Main {
         String number2SpecifiedNumeralSystem = number2.toSpecifiedNumeralSystem(NumeralSystem.BINARY);
         String number3SpecifiedNumeralSystem = number3.toSpecifiedNumeralSystem(NumeralSystem.BINARY);
 
-        FractionalSystem fractionalSystem = new FractionalSystem();
 
         double b = Math.sqrt(2);
         double n = 126.25;

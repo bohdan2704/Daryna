@@ -2,7 +2,6 @@ package org.example.ui.windows;
 
 import org.example.alternative.AlternativeNumeralSystem;
 import org.example.alternative.FibonacciSystem;
-import org.example.alternative.FractionalSystem;
 import org.example.alternative.NumeralSystemInterface;
 
 import javax.swing.*;
