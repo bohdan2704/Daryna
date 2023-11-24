@@ -38,12 +38,14 @@ public class Number {
     public String toSpecifiedNumeralSystem(NumeralSystem numeralSystem) {
         String intStr = integerPart.toSpecifiedNumeralSystem(numeralSystem);
         String frStr = fractionPart.toSpecifiedNumeralSystem(numeralSystem);
-        if (intStr.isEmpty()) {
-            return "0" + frStr;
-        } else if (frStr.equals(".")) {
-            return intStr + "0";
+        String wholeNumber = intStr + frStr;
+        if (wholeNumber.charAt(0) == '.') {
+            return "0" + wholeNumber;
+        } else if (wholeNumber.charAt(wholeNumber.length()-1) == '.') {
+            return wholeNumber + "0";
         } else {
-            return intStr + frStr;
+            return wholeNumber;
         }
+
     }
 }
