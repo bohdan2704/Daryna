@@ -2,13 +2,13 @@ package org.example.ui.windows;
 
 import org.example.operations.BinaryCalculator;
 import org.example.operations.BinaryNumber;
+import org.example.operations.BinaryOperation;
 import org.example.ui.elements.HintTextField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class BinaryCalculatorPanel extends JPanel {
+public class BinaryCalculatorPanel extends Panel {
     private final JTextField aTextField;
     private final JTextField bTextField;
     private final JLabel result;
@@ -37,50 +37,40 @@ public class BinaryCalculatorPanel extends JPanel {
         subtractButton = new JButton("-");
         addComponent(subtractButton, gbc, 0, 5);
 
-        addButton.addActionListener(e -> addOperation());
-        subtractButton.addActionListener(e -> subtractOperation());
+        addButton.addActionListener(e -> performOperation(BinaryOperation.ADD));
+        subtractButton.addActionListener(e -> performOperation(BinaryOperation.SUBTRACT));
 
         setFontSize(addButton, subtractButton, result, aTextField, bTextField);
 
         setPreferredSize(new Dimension(400, 300));
     }
 
-    private void addComponent(Component c, GridBagConstraints gbc, int x, int y) {
-        gbc.gridx = x;
-        gbc.gridy = y;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(c, gbc);
-    }
+    public void performOperation(BinaryOperation operation) {
+        String aValue = aTextField.getText();
+        String bValue = bTextField.getText();
 
-    private void setFontSize(Component... components) {
-        Font defaultFont = new Font("Roboto", Font.PLAIN, 20);
+        try {
+            BinaryNumber binaryNumber1 = new BinaryNumber(aValue);
+            BinaryNumber binaryNumber2 = new BinaryNumber(bValue);
 
-        for (Component component : components) {
-            component.setFont(defaultFont);
+            BinaryCalculator binaryCalculator = new BinaryCalculator();
+            BinaryNumber resultNumber;
+
+            switch (operation) {
+                case BinaryOperation.ADD:
+                    resultNumber = binaryCalculator.add(binaryNumber1, binaryNumber2);
+                    result.setText(resultNumber.getBinaryString() + " -- " + resultNumber.getDecimal(true));
+                    break;
+
+                case BinaryOperation.SUBTRACT:
+                    resultNumber = binaryCalculator.subtract(binaryNumber1, binaryNumber2);
+                    result.setText(resultNumber.getBinaryString() + " -- " + resultNumber.getDecimal());
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported operation");
+            }
+        } catch (IllegalArgumentException e) {
+            result.setText("Binary numbers must be composed using only '0' and '1'!");
         }
-    }
-
-    public void addOperation() {
-        String aValue = aTextField.getText();
-        String bValue = bTextField.getText();
-        BinaryNumber binaryNumber1 = new BinaryNumber(aValue);
-        BinaryNumber binaryNumber2 = new BinaryNumber(bValue);
-
-        BinaryCalculator binaryCalculator = new BinaryCalculator();
-        BinaryNumber addResult = binaryCalculator.add(binaryNumber1, binaryNumber2);
-        result.setText(addResult.getBinaryString() + " -- " + addResult.getDecimal(true));
-    }
-
-    public void subtractOperation() {
-        String aValue = aTextField.getText();
-        String bValue = bTextField.getText();
-        BinaryNumber binaryNumber1 = new BinaryNumber(aValue);
-        BinaryNumber binaryNumber2 = new BinaryNumber(bValue);
-
-        BinaryCalculator binaryCalculator = new BinaryCalculator();
-        BinaryNumber subtractResult = binaryCalculator.subtract(binaryNumber1, binaryNumber2);
-        result.setText(subtractResult.getBinaryString() + " -- " + subtractResult.getDecimal());
     }
 }

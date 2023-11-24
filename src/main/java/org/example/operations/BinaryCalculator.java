@@ -11,7 +11,7 @@ public class BinaryCalculator {
             b.fillWithZeros(a.size());
         }
 
-        BinaryNumber result = new BinaryNumber("9".repeat(a.size()+1));
+        BinaryNumber result = new BinaryNumber("0".repeat(a.size()+1));
         int cin = 0;
         int len = a.size();
         for (int i = 0; i < len; i++){

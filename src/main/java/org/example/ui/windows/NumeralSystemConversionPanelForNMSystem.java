@@ -7,7 +7,7 @@ import org.example.ui.elements.HintTextField;
 import javax.swing.*;
 import java.awt.*;
 
-public class NumeralSystemConversionPanelForNMSystem extends JPanel implements ConversionPanel {
+public class NumeralSystemConversionPanelForNMSystem extends Panel implements ConversionPanel {
     private final JTextField textField;
     private final JTextField nTextField;
     private final JTextField mTextField;
@@ -21,24 +21,19 @@ public class NumeralSystemConversionPanelForNMSystem extends JPanel implements C
         GridBagConstraints gbc = new GridBagConstraints();
 
         textField = new HintTextField("Enter number in decimal");
-        addComponent(gbc, 0, 0);
-        add(textField, gbc);
+        addComponent(textField, gbc, 0, 0);
 
         nTextField = new HintTextField("Enter N");
-        addComponent(gbc,0, 1);
-        add(nTextField, gbc);
+        addComponent(nTextField, gbc,0, 1);
 
         mTextField = new HintTextField("Enter M");
-        addComponent(gbc,0, 2);
-        add(mTextField, gbc);
+        addComponent(mTextField, gbc,0, 2);
 
         resultLabelForFractionalSystem = new JLabel("Number in alternative base: ");
-        addComponent(gbc, 0,3);
-        add(resultLabelForFractionalSystem, gbc);
+        addComponent(resultLabelForFractionalSystem, gbc, 0,3);
 
         convertButton = new JButton("Convert");
-        addComponent(gbc, 0, 4);
-        add(convertButton, gbc);
+        addComponent(convertButton, gbc, 0, 4);
 
         setFontSize(textField, convertButton, resultLabelForFractionalSystem);
         convertButton.addActionListener(e -> performConversion());
@@ -49,8 +44,13 @@ public class NumeralSystemConversionPanelForNMSystem extends JPanel implements C
     @Override
     public void performConversion() {
         int inputValue = (int)Double.parseDouble(textField.getText());
-        int nValue = Integer.parseInt(nTextField.getText());
-        int mValue = Integer.parseInt(mTextField.getText());
+        int nValue = (int)Double.parseDouble(nTextField.getText());
+        int mValue = (int)Double.parseDouble(mTextField.getText());
+
+        if (nValue <= mValue) {
+            resultLabelForFractionalSystem.setText("N must be greater than M. So the base will be > 1");
+            return;
+        }
 
         BaseNM baseNM = new BaseNM();
         String numInFractionalSystemBase = baseNM.toBase(inputValue, nValue, mValue);

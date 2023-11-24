@@ -6,7 +6,7 @@ import org.example.ui.elements.HintTextField;
 import javax.swing.*;
 import java.awt.*;
 
-public class NumeralSystemConversionPanelForFractionalSystem extends JPanel implements ConversionPanel {
+public class NumeralSystemConversionPanelForFractionalSystem extends Panel implements ConversionPanel {
     private final JTextField textField;
     private final JTextField fractionalBase;
     private final JLabel resultLabelForFractionalSystem;
@@ -19,20 +19,16 @@ public class NumeralSystemConversionPanelForFractionalSystem extends JPanel impl
         GridBagConstraints gbc = new GridBagConstraints();
 
         textField = new HintTextField("Enter number in decimal");
-        addComponent(gbc, 0, 0);
-        add(textField, gbc);
+        addComponent(textField, gbc, 0, 0);
 
         fractionalBase = new HintTextField("Enter base (only for fractional system)");
-        addComponent(gbc,0, 1);
-        add(fractionalBase, gbc);
+        addComponent(fractionalBase, gbc,0, 1);
 
         resultLabelForFractionalSystem = new JLabel("Number in alternative base: ");
-        addComponent(gbc, 0,5);
-        add(resultLabelForFractionalSystem, gbc);
+        addComponent(resultLabelForFractionalSystem, gbc, 0,5);
 
         convertButton = new JButton("Convert");
-        addComponent(gbc, 0, 6);
-        add(convertButton, gbc);
+        addComponent(convertButton, gbc, 0, 6);
 
         setFontSize(textField, convertButton, resultLabelForFractionalSystem);
         convertButton.addActionListener(e -> performConversion());

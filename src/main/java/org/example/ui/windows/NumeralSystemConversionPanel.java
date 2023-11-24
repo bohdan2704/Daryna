@@ -7,7 +7,7 @@ import org.example.ui.elements.HintTextField;
 import javax.swing.*;
 import java.awt.*;
 
-public class NumeralSystemConversionPanel extends JPanel implements ConversionPanel {
+public class NumeralSystemConversionPanel extends Panel implements ConversionPanel {
     private final JTextField textField;
     private final JComboBox<NumeralSystem> numeralSystemJComboBox1;
     private final JLabel resultLabel;
@@ -20,21 +20,16 @@ public class NumeralSystemConversionPanel extends JPanel implements ConversionPa
         GridBagConstraints gbc = new GridBagConstraints();
 
         textField = new HintTextField("Enter number in decimal");
-        addComponent(gbc, 0, 0);
-        add(textField, gbc);
-
+        addComponent(textField, gbc, 0, 0);
 
         numeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
-        addComponent(gbc, 0, 2);
-        add(numeralSystemJComboBox1, gbc);
+        addComponent(numeralSystemJComboBox1, gbc, 0, 2);
 
         resultLabel = new JLabel("Number in different base: ");
-        addComponent(gbc, 0, 4);
-        add(resultLabel, gbc);
+        addComponent(resultLabel, gbc, 0, 4);
 
         convertButton = new JButton("Convert");
-        addComponent(gbc, 0, 6);
-        add(convertButton, gbc);
+        addComponent(convertButton, gbc, 0, 6);
 
         setFontSize(textField, convertButton, resultLabel);
         convertButton.addActionListener(e -> performConversion());
