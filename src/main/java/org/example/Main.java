@@ -32,11 +32,8 @@ public class Main {
         Timer timer = new Timer();
 
         timer.startTimer();
-        String num = fractionalSystem.toBase(n, b);
         timer.stopTimer();
 
-        System.out.println(num);
-        System.out.println(fractionalSystem.fromBase(num, b));
     }
 
 

@@ -1,8 +1,10 @@
 package org.example.alternative;
 
-public class UnarySystem {
+public class UnarySystem implements NumeralSystemInterface {
     // Convert decimal to unary system
-    public String toBase(int decimal) {
+    @Override
+    public String toBase(int num) {
+        int decimal = (int) num;
         if (decimal < 0) {
             throw new IllegalArgumentException("Unary system does not support negative numbers.");
         }
@@ -11,6 +13,7 @@ public class UnarySystem {
     }
 
     // Convert unary system to decimal
+    @Override
     public int fromBase(String unary) {
         if (unary == null || unary.isEmpty()) {
             throw new IllegalArgumentException("Invalid unary representation.");

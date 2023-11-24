@@ -13,13 +13,18 @@ public class NumeralSystemAlgorithms {
     static {
         commandMap.put(AlternativeNumeralSystem.FIBONACCI_SYSTEM, new FibonacciSystem());
         commandMap.put(AlternativeNumeralSystem.FRACTIONAL_SYSTEM, new FractionalSystem());
+        commandMap.put(AlternativeNumeralSystem.GOLDEN_SYSTEM, new FractionalSystem());
+        commandMap.put(AlternativeNumeralSystem.UNARY_SYSTEM, new FractionalSystem());
+        commandMap.put(AlternativeNumeralSystem.SQUARE_ROOT_SYSTEM, new FractionalSystem());
+        commandMap.put(AlternativeNumeralSystem.IMPERIAL_SYSTEM, new FractionalSystem());
+
     }
 
-    public static String convert(AlternativeNumeralSystem numeralSystem, double inputValue, double baseInputValue) {
-        return commandMap.get(numeralSystem).toBase(inputValue, baseInputValue);
+    public static String convert(AlternativeNumeralSystem numeralSystem, int inputValue) {
+        return commandMap.get(numeralSystem).toBase(inputValue);
     }
 
     public static double reverseConvert(AlternativeNumeralSystem numeralSystem, String numInAlternativeSystem, double baseInputValue) {
-        return commandMap.get(numeralSystem).fromBase(numInAlternativeSystem, baseInputValue);
+        return commandMap.get(numeralSystem).fromBase(numInAlternativeSystem);
     }
 }

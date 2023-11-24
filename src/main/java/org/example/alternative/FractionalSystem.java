@@ -1,8 +1,5 @@
 package org.example.alternative;
 
-import org.example.numeric.NumeralSystem;
-import org.example.numeric.Number;
-
 public class FractionalSystem implements NumeralSystemInterface {
     private static final int precision = 16; // Precision is pow of 10
 
@@ -22,32 +19,9 @@ public class FractionalSystem implements NumeralSystemInterface {
         return b.toString();
     }
 
-    public String squareRootToBase(double number) {
-        Number num = new Number(number);
-        String binaryNumber = num.toSpecifiedNumeralSystem(NumeralSystem.BINARY);
-        System.out.println(binaryNumber);
-
-        StringBuilder b = new StringBuilder();
-        for (int i = 0; i < binaryNumber.length(); i++) {
-            if (binaryNumber.charAt(i) == '.') {
-                b.deleteCharAt(b.length() - 1);
-                b.deleteCharAt(b.length() - 1);
-                b.deleteCharAt(b.length() - 1);
-                // Remove zero that was added right before point
-                // Because SQRT^0 is 1 in any system, we don't need to double this buddy
-            }
-            b.append(binaryNumber.charAt(i)).append(0);
-        }
-        return b.toString();
-    }
 
     @Override
-    public String toBase(double n, double b) {
-        // Checking if base nearly equals SQRT(2)
-        // Then use special formula
-        if ( Math.abs(b - Math.sqrt(2)) < 10E3) {
-            return squareRootToBase(n);
-        }
+    public String toBase(int n) {
         int k = (int) Math.floor(Math.log(n) / Math.log(b)) + 1;
         StringBuilder result = new StringBuilder();
 
@@ -62,21 +36,6 @@ public class FractionalSystem implements NumeralSystemInterface {
         }
 
         return result.toString();
-    }
-
-    @Override
-    public double fromBase(String num, double base) {
-        String[] numberSplit = num.split("\\.");
-        int numberLength = numberSplit[0].length();
-
-        double output = 0;
-        String digits = String.join("", numberSplit);
-
-        for (int i = 0; i < digits.length(); i++) {
-            output += Character.getNumericValue(digits.charAt(i)) * Math.pow(base, numberLength - i - 1);
-        }
-
-        return output;
     }
 
 }

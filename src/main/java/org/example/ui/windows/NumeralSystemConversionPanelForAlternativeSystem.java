@@ -7,11 +7,11 @@ import org.example.ui.elements.NumeralSystemAlgorithms;
 import javax.swing.*;
 import java.awt.*;
 
-public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel {
-    private JTextField textField;
-    private JTextField textFieldOptionalBase;
-    private JComboBox<AlternativeNumeralSystem> numeralSystemJComboBox2;
-    private JLabel resultLabelForAlternativeSystem;
+public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel implements ConversionPanel {
+    private final JTextField textField;
+    private final JTextField textFieldOptionalBase;
+    private final JComboBox<AlternativeNumeralSystem> alternativeNumeralSystemJComboBox;
+    private final JLabel resultLabelForAlternativeSystem;
     private JButton convertButton;
 
     public NumeralSystemConversionPanelForAlternativeSystem() {
@@ -21,19 +21,24 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         textField = new HintTextField("Enter number in decimal");
-        addComponent(textField, gbc, 0);
+        addComponent(gbc, 0, 0);
+        add(textField, gbc);
 
         textFieldOptionalBase = new HintTextField("Enter base (only for fractional system)");
-        addComponent(textFieldOptionalBase, gbc, 1);
+        addComponent(gbc,0, 1);
+        add(textFieldOptionalBase, gbc);
 
-        numeralSystemJComboBox2 = new JComboBox<>(AlternativeNumeralSystem.values());
-        addComponent(numeralSystemJComboBox2, gbc, 3);
+        alternativeNumeralSystemJComboBox = new JComboBox<>(AlternativeNumeralSystem.values());
+        addComponent(gbc, 0,3);
+        add(alternativeNumeralSystemJComboBox, gbc);
 
         resultLabelForAlternativeSystem = new JLabel("Number in alternative base: ");
-        addComponent(resultLabelForAlternativeSystem, gbc, 5);
+        addComponent(gbc, 0,5);
+        add(resultLabelForAlternativeSystem, gbc);
 
         convertButton = new JButton("Convert");
-        addComponent(convertButton, gbc, 6);
+        addComponent(gbc, 0, 6);
+        add(convertButton, gbc);
 
         Font biggerFont = textField.getFont().deriveFont(20f);
         textField.setFont(biggerFont);
@@ -44,20 +49,12 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel {
         setPreferredSize(new Dimension(400, 300));
     }
 
-    private void addComponent(Component component, GridBagConstraints gbc, int gridY) {
-        gbc.gridx = 0;
-        gbc.gridy = gridY;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(component, gbc);
-    }
-
-    private void performConversion() {
+    @Override
+    public void performConversion() {
         double inputValue = Double.parseDouble(textField.getText());
 
         // Working with alternative numeral system, converting numbers
-        AlternativeNumeralSystem alternativeNumeralSystem = (AlternativeNumeralSystem) numeralSystemJComboBox2.getSelectedItem();
+        AlternativeNumeralSystem alternativeNumeralSystem = (AlternativeNumeralSystem) alternativeNumeralSystemJComboBox.getSelectedItem();
 
         // Getting base (only for fractional system)
         double baseInputValue = 0;
@@ -65,7 +62,7 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel {
             baseInputValue = Double.parseDouble(textFieldOptionalBase.getText());
         }
 
-        String numInAlternativeSystem = NumeralSystemAlgorithms.convert(alternativeNumeralSystem, inputValue, baseInputValue);
+        String numInAlternativeSystem = NumeralSystemAlgorithms.convert(alternativeNumeralSystem, (int) inputValue);
         double reverseConvertForAlternative = NumeralSystemAlgorithms.reverseConvert(alternativeNumeralSystem, numInAlternativeSystem, baseInputValue);
 
         // Setting the result to our beautiful label

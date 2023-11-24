@@ -6,10 +6,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class HintTextField extends JTextField {
-    private final String hint;
 
     public HintTextField(String hint) {
-        this.hint = hint;
         setText(hint);
         setForeground(Color.GRAY);
 

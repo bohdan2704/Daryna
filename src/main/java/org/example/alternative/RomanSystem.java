@@ -1,10 +1,9 @@
 package org.example.alternative;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class RomanSystem {
+public class RomanSystem implements NumeralSystemInterface {
     private static final Map<Integer, String> DECIMAL_TO_ROMAN_TABLE = new LinkedHashMap<>();
     static {
         DECIMAL_TO_ROMAN_TABLE.put(1000, "M");

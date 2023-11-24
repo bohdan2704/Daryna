@@ -3,13 +3,14 @@ package org.example.alternative;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoldenSystem {
+public class GoldenSystem implements NumeralSystemInterface {
     public static final double PHI = 1.618033988749894848204586834;
     private static final double PHI_NEGATIVE = 1/PHI;
     private static final double APROXIMATION = 10E-3;
     private static final double UPPER_APROXIMATION = 10E3;
 
-    public String getNumber(double num) {
+    @Override
+    public String toBase(int num) {
         List<Integer> powersList = new ArrayList<>();
         while (num > APROXIMATION) {
             int phiPower = findPhiPowerThanLessOrEqual(num);
@@ -52,7 +53,7 @@ public class GoldenSystem {
         }
     }
 
-    public static String formNumberBasedOnPowers(List<Integer> listOfPowers) {
+    public String formNumberBasedOnPowers(List<Integer> listOfPowers) {
         StringBuilder b = new StringBuilder();
 
         // We have the smallest number, lets work with it
