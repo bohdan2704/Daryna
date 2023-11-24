@@ -39,7 +39,7 @@ public class GoldenSystemTest {
         StringBuilder b = new StringBuilder();
         GoldenSystem goldenSystem = new GoldenSystem();
         for (int i = 2; i <= 30; i++) {
-            b.append(goldenSystem.getNumber(i)).append("\n");
+            b.append(goldenSystem.toBase(i)).append("\n");
         }
         String[] phiBaseNumbersFromBook = FirstThirtyPhiBaseNumbers.split("\n");
         String[] phiBaseNumbersCalculated = b.toString().split("\n");

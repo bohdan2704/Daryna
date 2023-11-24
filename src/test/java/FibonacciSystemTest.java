@@ -40,7 +40,7 @@ public class FibonacciSystemTest {
         StringBuilder b = new StringBuilder();
         FibonacciSystem fibonacciSystem = new FibonacciSystem();
         for (int i = 1; i <= 30; i++) {
-            b.append(fibonacciSystem.getNumber(i)).append("\n");
+            b.append(fibonacciSystem.toBase(i)).append("\n");
         }
         String[] phiBaseNumbersFromBook = FirstThirtyFibonacciBaseNumbers.split("\n");
         String[] phiBaseNumbersCalculated = b.toString().split("\n");
