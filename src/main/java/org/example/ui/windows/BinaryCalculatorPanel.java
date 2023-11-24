@@ -12,8 +12,8 @@ public class BinaryCalculatorPanel extends Panel {
     private final JTextField aTextField;
     private final JTextField bTextField;
     private final JLabel result;
-    private JButton addButton;
-    private JButton subtractButton;
+    private final JButton addButton;
+    private final JButton subtractButton;
 
 
     public BinaryCalculatorPanel() {
