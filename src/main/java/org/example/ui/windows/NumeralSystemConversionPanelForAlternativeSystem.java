@@ -9,7 +9,6 @@ import java.awt.*;
 
 public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel implements ConversionPanel {
     private final JTextField textField;
-    private final JTextField textFieldOptionalBase;
     private final JComboBox<AlternativeNumeralSystem> alternativeNumeralSystemJComboBox;
     private final JLabel resultLabelForAlternativeSystem;
     private JButton convertButton;
@@ -24,10 +23,6 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel imp
         addComponent(gbc, 0, 0);
         add(textField, gbc);
 
-        textFieldOptionalBase = new HintTextField("Enter base (only for fractional system)");
-        addComponent(gbc,0, 1);
-        add(textFieldOptionalBase, gbc);
-
         alternativeNumeralSystemJComboBox = new JComboBox<>(AlternativeNumeralSystem.values());
         addComponent(gbc, 0,3);
         add(alternativeNumeralSystemJComboBox, gbc);
@@ -40,10 +35,7 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends JPanel imp
         addComponent(gbc, 0, 6);
         add(convertButton, gbc);
 
-        Font biggerFont = textField.getFont().deriveFont(20f);
-        textField.setFont(biggerFont);
-        convertButton.setFont(biggerFont);
-
+        setFontSize(textField, convertButton, resultLabelForAlternativeSystem);
         convertButton.addActionListener(e -> performConversion());
 
         setPreferredSize(new Dimension(400, 300));

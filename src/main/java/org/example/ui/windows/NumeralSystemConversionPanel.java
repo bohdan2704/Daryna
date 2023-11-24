@@ -36,18 +36,10 @@ public class NumeralSystemConversionPanel extends JPanel implements ConversionPa
         addComponent(gbc, 0, 6);
         add(convertButton, gbc);
 
-        setFontSize();
-
+        setFontSize(textField, convertButton, resultLabel);
         convertButton.addActionListener(e -> performConversion());
 
         setPreferredSize(new Dimension(400, 300));
-    }
-
-    private void setFontSize() {
-        Font biggerFont = textField.getFont().deriveFont(20f);
-        textField.setFont(biggerFont);
-        convertButton.setFont(biggerFont);
-        resultLabel.setFont(biggerFont);
     }
     @Override
     public void performConversion() {
