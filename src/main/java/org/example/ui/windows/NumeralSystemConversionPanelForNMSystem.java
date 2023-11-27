@@ -56,6 +56,6 @@ public class NumeralSystemConversionPanelForNMSystem extends Panel implements Co
 
         double reverseConvert = baseNM.fromBase(numInFractionalSystemBase, nValue, mValue);
         // Setting the result to our beautiful label
-        resultLabelForFractionalSystem.setText("Fractional base (" + nValue + "/" + mValue + ") " + numInFractionalSystemBase + " -- " + reverseConvert);
+        resultLabelForFractionalSystem.setText(formOutputLine("Base <sup>" + nValue + "</sup>&frasl;<sub>" + mValue + "</sub>", numInFractionalSystemBase, reverseConvert ));
     }
 }

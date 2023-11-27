@@ -46,6 +46,6 @@ public class NumeralSystemConversionPanelForFractionalSystem extends Panel imple
 
         double reverseConvert = fractionalSystem.fromBase(numInFractionalSystemBase, baseValue);
         // Setting the result to our beautiful label
-        resultLabelForFractionalSystem.setText("Fractional base (" + baseValue + ") " + numInFractionalSystemBase + " -- " + reverseConvert);
+        resultLabelForFractionalSystem.setText(formOutputLine("Base " + baseValue, numInFractionalSystemBase, reverseConvert));
     }
 }

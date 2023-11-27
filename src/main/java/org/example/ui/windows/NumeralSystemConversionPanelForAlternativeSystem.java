@@ -48,6 +48,7 @@ public class NumeralSystemConversionPanelForAlternativeSystem extends Panel impl
         double reverseConvertForAlternative = NumeralSystemAlgorithms.reverseConvert(alternativeNumeralSystem, numInAlternativeSystem);
 
         // Setting the result to our beautiful label
-        resultLabelForAlternativeSystem.setText(alternativeNumeralSystem + " " + numInAlternativeSystem + " -- " + reverseConvertForAlternative);
+        assert alternativeNumeralSystem != null; // This will never be null
+        resultLabelForAlternativeSystem.setText(formOutputLine(alternativeNumeralSystem.name(), numInAlternativeSystem, reverseConvertForAlternative));
     }
 }

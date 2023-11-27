@@ -14,7 +14,7 @@ public class NumeralSystemConverterUI {
         tabbedPane.addTab("Alternative Systems", createConversionPanelForAlternativeSystem()); // Add a duplicate panel
         tabbedPane.addTab("Fractional System", createConversionPanelForFractionalSystem()); // Add a duplicate panel
         tabbedPane.addTab("NM System", createConversionPanelForNMSystem()); // Add a duplicate panel
-        tabbedPane.addTab("Calculator", createCalculatorPanel()); // Add a duplicate panel
+//        tabbedPane.addTab("Calculator", createCalculatorPanel()); // Add a duplicate panel
 
         frame.add(tabbedPane);
 

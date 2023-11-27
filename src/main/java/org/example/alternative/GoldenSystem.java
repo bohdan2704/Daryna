@@ -68,7 +68,7 @@ public class GoldenSystem implements NumeralSystemInterface {
             listOfPowers.replaceAll(integer -> integer + -incrementValueToGetOnlyPositiveIndexes);
         }
 
-        for (int i = listOfPowers.getFirst(); i >= 0; i--) {
+        for (int i = listOfPowers.get(0); i >= 0; i--) {
             // So we have zero index
 
             if (listOfPowers.contains(i)) {

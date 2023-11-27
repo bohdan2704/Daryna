@@ -2,6 +2,7 @@ package org.example.ui.windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class Panel extends JPanel {
     protected void addComponent(Component c, GridBagConstraints gbc, int x, int y) {
@@ -19,5 +20,13 @@ public class Panel extends JPanel {
         for (Component component : components) {
             component.setFont(defaultFont);
         }
+    }
+
+    // Formatting output line for label
+    protected String formOutputLine(String s1, String s2, double d1) {
+        s1 = s1.substring(0, 1).toUpperCase() + s1.substring(1).toLowerCase();
+        DecimalFormat decimalFormat = new DecimalFormat("#.####");
+        String s3 = decimalFormat.format(d1);
+        return String.format("<html>%s: %s<br>Decimal: %s</html>", s1.split("_")[0], s2, s3);
     }
 }

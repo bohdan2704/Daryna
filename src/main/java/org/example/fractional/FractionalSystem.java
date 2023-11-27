@@ -1,9 +1,11 @@
 package org.example.fractional;
 
 import org.example.alternative.FromBase;
+import org.example.numeric.Number;
+import org.example.numeric.NumeralSystem;
 
 public class FractionalSystem {
-    private static final int precision = 16; // Precision is pow of 10
+    private static final int precision = 4; // How many numbers after point will be
 
     public String toBase(double n, double b) {
         int k = (int) Math.floor(Math.log(n) / Math.log(b)) + 1;

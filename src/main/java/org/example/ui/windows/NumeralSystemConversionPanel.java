@@ -52,6 +52,6 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
         double reverseConvertForNumInDiffBase = numberReverseConvert.getDecimalNumber();
 
         // Setting the result to our beautiful label
-        resultLabel.setText(numeralSystemWithDiffBase + " " + numberInDiffBase + " -- " + reverseConvertForNumInDiffBase);
+        resultLabel.setText(formOutputLine(numeralSystemWithDiffBase.name(), numberInDiffBase,reverseConvertForNumInDiffBase ));
     }
 }
