@@ -9,7 +9,8 @@ import java.awt.*;
 
 public class NumeralSystemConversionPanel extends Panel implements ConversionPanel {
     private final JTextField textField;
-    private final JComboBox<NumeralSystem> numeralSystemJComboBox1;
+    private final JComboBox<NumeralSystem> fromNumeralSystemJComboBox1;
+    private final JComboBox<NumeralSystem> toNumeralSystemJComboBox1;
     private final JLabel resultLabel;
     private final JButton convertButton;
 
@@ -19,12 +20,15 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        textField = new HintTextField("Enter number in decimal");
+        textField = new HintTextField("Enter number in picked base");
         addComponent(textField, gbc, 0, 0);
 
-        numeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
-        addComponent(numeralSystemJComboBox1, gbc, 0, 2);
-
+        fromNumeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
+        addComponent(fromNumeralSystemJComboBox1, gbc, 0, 2);
+        
+        toNumeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
+        addComponent(toNumeralSystemJComboBox1, gbc, 0, 3);
+        
         resultLabel = new JLabel("Number in different base: ");
         addComponent(resultLabel, gbc, 0, 4);
 
@@ -39,19 +43,23 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
 
     @Override
     public void performConversion() {
-        double inputValue = Double.parseDouble(textField.getText());
+        String inputValueInSomeBase = textField.getText();
+        NumeralSystem fromNumeralSystem = (NumeralSystem) fromNumeralSystemJComboBox1.getSelectedItem();
+        Number number = new Number(fromNumeralSystem, inputValueInSomeBase);
 
         // Carry out converting in number system with diff base
-        NumeralSystem numeralSystemWithDiffBase = (NumeralSystem) numeralSystemJComboBox1.getSelectedItem();
+        double inputValue = number.getDecimalNumber();
+
+        NumeralSystem toNumeralSystem = (NumeralSystem) toNumeralSystemJComboBox1.getSelectedItem();
         Number numberFromInput = new Number(inputValue);
-        String numberInDiffBase = numberFromInput.toSpecifiedNumeralSystem(numeralSystemWithDiffBase);
+        String numberInDiffBase = numberFromInput.toSpecifiedNumeralSystem(toNumeralSystem);
 
         // Reverse convert to check if everything was converted properly
-        assert numeralSystemWithDiffBase != null; // Argument won't be null
-        Number numberReverseConvert = new Number(numeralSystemWithDiffBase, numberInDiffBase);
+        assert toNumeralSystem != null; // Argument won't be null
+        Number numberReverseConvert = new Number(toNumeralSystem, numberInDiffBase);
         double reverseConvertForNumInDiffBase = numberReverseConvert.getDecimalNumber();
 
         // Setting the result to our beautiful label
-        resultLabel.setText(formOutputLine(numeralSystemWithDiffBase.name(), numberInDiffBase,reverseConvertForNumInDiffBase ));
+        resultLabel.setText(formOutputLine(toNumeralSystem.name(), numberInDiffBase,reverseConvertForNumInDiffBase ));
     }
 }
