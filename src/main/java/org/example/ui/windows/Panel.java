@@ -29,4 +29,11 @@ public class Panel extends JPanel {
         String s3 = decimalFormat.format(d1);
         return String.format("<html>%s: %s<br>Decimal: %s</html>", s1.split("_")[0], s2, s3);
     }
+
+    protected String formOutputLineIfDecimalIsResultingBase(String s1, double d1) {
+        s1 = s1.substring(0, 1).toUpperCase() + s1.substring(1).toLowerCase();
+        DecimalFormat decimalFormat = new DecimalFormat("#.####");
+        String s3 = decimalFormat.format(d1);
+        return String.format("<html>%s: %s</html>", s1.split("_")[0], s3);
+    }
 }

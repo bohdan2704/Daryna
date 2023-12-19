@@ -12,6 +12,8 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
     private final JComboBox<NumeralSystem> fromNumeralSystemJComboBox1;
     private final JComboBox<NumeralSystem> toNumeralSystemJComboBox1;
     private final JLabel resultLabel;
+    private final JLabel labelComboBox1;
+    private final JLabel labelComboBox2;
     private final JButton convertButton;
 
     public NumeralSystemConversionPanel() {
@@ -20,20 +22,26 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        textField = new HintTextField("Enter number in picked base");
+        textField = new HintTextField("Enter number");
         addComponent(textField, gbc, 0, 0);
 
+        labelComboBox1 = new JLabel("From base: ");
+        addComponent(labelComboBox1, gbc, 0, 2);
+
         fromNumeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
-        addComponent(fromNumeralSystemJComboBox1, gbc, 0, 2);
-        
+        addComponent(fromNumeralSystemJComboBox1, gbc, 0, 3);
+
+        labelComboBox2 = new JLabel("To base: ");
+        addComponent(labelComboBox2, gbc, 0, 4);
+
         toNumeralSystemJComboBox1 = new JComboBox<>(NumeralSystem.values());
-        addComponent(toNumeralSystemJComboBox1, gbc, 0, 3);
+        addComponent(toNumeralSystemJComboBox1, gbc, 0, 5);
         
         resultLabel = new JLabel("Number in different base: ");
-        addComponent(resultLabel, gbc, 0, 4);
+        addComponent(resultLabel, gbc, 0, 6);
 
         convertButton = new JButton("Convert");
-        addComponent(convertButton, gbc, 0, 6);
+        addComponent(convertButton, gbc, 0, 7);
 
         setFontSize(textField, convertButton, resultLabel);
         convertButton.addActionListener(e -> performConversion());
@@ -60,6 +68,10 @@ public class NumeralSystemConversionPanel extends Panel implements ConversionPan
         double reverseConvertForNumInDiffBase = numberReverseConvert.getDecimalNumber();
 
         // Setting the result to our beautiful label
-        resultLabel.setText(formOutputLine(toNumeralSystem.name(), numberInDiffBase,reverseConvertForNumInDiffBase ));
+        if (toNumeralSystem.equals(NumeralSystem.DECIMAL)) {
+            resultLabel.setText(formOutputLineIfDecimalIsResultingBase(toNumeralSystem.name(), reverseConvertForNumInDiffBase));
+        } else {
+            resultLabel.setText(formOutputLine(toNumeralSystem.name(), numberInDiffBase,reverseConvertForNumInDiffBase ));
+        }
     }
 }
